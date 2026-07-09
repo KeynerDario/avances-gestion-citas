@@ -1,9 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { AppointmentRepository } from "../api/appointments.repository";
+import { supabase } from "../../../lib/supabase";
 import { toast } from "sonner";
-import { useAuth } from "../../../providers/AuthProvider";
+import { useAuth } from "../../../providers/AuthContext";
 
-// ESTADOS DE CARGA ESPECÍFICOS (mejor UX que un genérico "loading")
 const STATUS = {
   IDLE: "idle",
   CREATING: "creating",
@@ -17,18 +17,19 @@ export function useAppointments() {
   const [status, setStatus] = useState(STATUS.IDLE);
   const [error, setError] = useState(null);
   const { user, profile, isAprendiz } = useAuth();
+  const userId = user?.id;
+  const dependencyId = profile?.dependency_id;
+  const userIsAprendiz = isAprendiz();
 
-  // FETCH: Obtener citas según el rol automáticamente
   const fetchAppointments = useCallback(
     async (filters = {}) => {
       setStatus(STATUS.FETCHING);
       setError(null);
 
       try {
-        // RBAC implícito: los filtros dependen del rol
-        const roleFilters = isAprendiz()
-          ? { userId: user.id }
-          : { dependencyId: profile.dependency_id };
+        const roleFilters = userIsAprendiz
+          ? { userId }
+          : { dependencyId };
 
         const data = await AppointmentRepository.fetch({
           ...roleFilters,
@@ -44,15 +45,46 @@ export function useAppointments() {
         setStatus(STATUS.IDLE);
       }
     },
-    [user, profile, isAprendiz],
+    [userId, dependencyId, userIsAprendiz],
   );
 
-  // CREATE: Crear cita con validaciones de negocio
+  const fetchRef = useRef(fetchAppointments);
+
+  useEffect(() => {
+    fetchRef.current = fetchAppointments;
+  }, [fetchAppointments]);
+
+  // Debounced realtime subscription — avoids rapid re-fetches on burst events
+  useEffect(() => {
+    let debounceTimer = null;
+    let mounted = true;
+    const channelName = `appointments-${Math.random().toString(36).slice(2, 8)}`;
+
+    const channel = supabase
+      .channel(channelName)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "appointments" },
+        () => {
+          if (debounceTimer) clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => {
+            if (mounted) fetchRef.current();
+          }, 1000);
+        },
+      )
+      .subscribe();
+
+    return () => {
+      mounted = false;
+      if (debounceTimer) clearTimeout(debounceTimer);
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
   const createAppointment = async (formData) => {
     setStatus(STATUS.CREATING);
 
     try {
-      // Regla de negocio: Máximo 2 citas pendientes
       if (isAprendiz()) {
         const pendingCount = await AppointmentRepository.countPending(user.id);
         if (pendingCount >= 2) {
@@ -62,7 +94,6 @@ export function useAppointments() {
         }
       }
 
-      // Verificar disponibilidad de horario
       const isAvailable = await AppointmentRepository.checkAvailability(
         formData.dependency_id,
         formData.scheduled_date,
@@ -73,14 +104,17 @@ export function useAppointments() {
         throw new Error("Este horario ya está ocupado. Selecciona otro.");
       }
 
-      // Crear la cita
+      const professionalId = await AppointmentRepository.findProfessionalForDependency(
+        formData.dependency_id
+      );
+
       const newAppointment = await AppointmentRepository.create({
         ...formData,
         user_id: user.id,
+        professional_id: professionalId,
         status: "pending",
-      });
+      }, user.id);
 
-      // OPTIMISTIC UPDATE: Actualizamos UI inmediatamente
       setAppointments((prev) => [...prev, newAppointment]);
       toast.success("Cita agendada correctamente");
       return { success: true, data: newAppointment };
@@ -93,7 +127,6 @@ export function useAppointments() {
     }
   };
 
-  // UPDATE STATUS: Cambiar estado (confirmar, completar, cancelar)
   const updateStatus = async (appointmentId, newStatus, notes = null) => {
     setStatus(STATUS.UPDATING);
 
@@ -104,9 +137,9 @@ export function useAppointments() {
       const updated = await AppointmentRepository.update(
         appointmentId,
         updates,
+        user.id,
       );
 
-      // Actualizar estado local sin recargar todo
       setAppointments((prev) =>
         prev.map((app) => (app.id === appointmentId ? updated : app)),
       );
@@ -123,7 +156,6 @@ export function useAppointments() {
     }
   };
 
-  // CANCEL: Cancelar cita (solo si está pending)
   const cancelAppointment = async (appointmentId) => {
     const appointment = appointments.find((a) => a.id === appointmentId);
 

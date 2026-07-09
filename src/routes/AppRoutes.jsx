@@ -1,104 +1,108 @@
 import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
-import { useAuth } from "../providers/AuthProvider";
+import { useAuth } from "../providers/AuthContext";
 import { Navigate } from "react-router-dom";
-
-// Lazy loading para code splitting (mejor performance)
 import { lazy, Suspense } from "react";
+import { ErrorBoundary } from "../shared/components/ErrorBoundary";
 
-// Públicas
 const Login = lazy(() => import("../features/auth/pages/Login"));
 const Register = lazy(() => import("../features/auth/pages/Register"));
+const ForgotPassword = lazy(() => import("../features/auth/pages/ForgotPassword"));
+const UpdatePassword = lazy(() => import("../features/auth/pages/UpdatePassword"));
 const Unauthorized = lazy(() => import("../shared/components/Unauthorized"));
+const NotFoundPage = lazy(() => import("../shared/components/NotFoundPage"));
 
-// Privadas - Aprendiz
 const AprendizDashboard = lazy(
   () => import("../features/appointments/pages/AprendizDashboard"),
 );
 
-// Privadas - Profesional
 const ProfessionalDashboard = lazy(
   () => import("../features/appointments/pages/ProfessionalDashboard"),
 );
 
-// Privadas - Coordinación
 const CoordinationDashboard = lazy(
   () => import("../features/dashboard/pages/CoordinationDashboard"),
 );
 
-// Privadas - Admin
 const AdminDashboard = lazy(
   () => import("../features/admin/pages/AdminDashboard"),
 );
 
-export function AppRoutes() {
-  const { isAprendiz, isProfessional, isCoordination, isAdmin } = useAuth();
+function LoadingFallback() {
+  return (
+    <div className="loading-screen" role="status" aria-live="polite">
+      <div className="loading-spinner" />
+      <p>Cargando...</p>
+    </div>
+  );
+}
 
-  // Redirección inteligente según rol (después del login)
+function PageWrapper({ children }) {
+  return (
+    <ErrorBoundary>
+      <div className="route-page">{children}</div>
+    </ErrorBoundary>
+  );
+}
+
+export function AppRoutes() {
+  const { isProfessional, isCoordination, isAdmin } = useAuth();
+
   const getHomeRoute = () => {
     if (isAdmin()) return "/admin";
     if (isCoordination()) return "/coordination";
     if (isProfessional()) return "/professional";
-    return "/dashboard"; // Aprendiz por defecto
+    return "/dashboard";
   };
 
   return (
-    <Suspense fallback={<div>Cargando...</div>}>
+    <Suspense fallback={<LoadingFallback />}>
       <Routes>
-        {/* RUTAS PÚBLICAS */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
+        <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
+        <Route path="/forgot-password" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
+        <Route path="/update-password" element={<PageWrapper><UpdatePassword /></PageWrapper>} />
+        <Route path="/unauthorized" element={<PageWrapper><Unauthorized /></PageWrapper>} />
 
-        {/* RUTAS PROTEGIDAS - APRENDIZ */}
         <Route
           path="/dashboard"
           element={
             <ProtectedRoute requiredRoles="APRENDIZ">
-              <AprendizDashboard />
+              <PageWrapper><AprendizDashboard /></PageWrapper>
             </ProtectedRoute>
           }
         />
 
-        {/* RUTAS PROTEGIDAS - PROFESIONALES */}
         <Route
           path="/professional"
           element={
-            <ProtectedRoute
-              requiredRoles={["PSICOLOGIA", "ENFERMERIA", "TRABAJO_SOCIAL"]}
-            >
-              <ProfessionalDashboard />
+            <ProtectedRoute requiredRoles="PROFESIONAL">
+              <PageWrapper><ProfessionalDashboard /></PageWrapper>
             </ProtectedRoute>
           }
         />
 
-        {/* RUTAS PROTEGIDAS - COORDINACIÓN */}
         <Route
           path="/coordination"
           element={
             <ProtectedRoute requiredRoles={["COORDINACION", "SUPERADMIN"]}>
-              <CoordinationDashboard />
+              <PageWrapper><CoordinationDashboard /></PageWrapper>
             </ProtectedRoute>
           }
         />
 
-        {/* RUTAS PROTEGIDAS - ADMIN */}
         <Route
           path="/admin"
           element={
             <ProtectedRoute requiredRoles="SUPERADMIN">
-              <AdminDashboard />
+              <PageWrapper><AdminDashboard /></PageWrapper>
             </ProtectedRoute>
           }
         />
 
-        {/* REDIRECCIÓN INICIAL */}
         <Route path="/" element={<Navigate to={getHomeRoute()} replace />} />
-
-        {/* 404 */}
-        <Route path="*" element={<div>404 - Página no encontrada</div>} />
+        <Route path="*" element={<PageWrapper><NotFoundPage /></PageWrapper>} />
       </Routes>
     </Suspense>
   );
-
 }

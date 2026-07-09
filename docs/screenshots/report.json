@@ -1,0 +1,55 @@
+{
+  "date": "2026-07-07T15:47:52.519Z",
+  "pages": [
+    {
+      "name": "01-login",
+      "loadTime": 2188,
+      "title": "gestion-citas",
+      "url": "http://localhost:5173/login",
+      "file": "C:\\Users\\FORMACION\\Desktop\\avances-gestion-citas\\docs\\screenshots\\01-login.png"
+    },
+    {
+      "name": "02-register",
+      "loadTime": 8757,
+      "title": "gestion-citas",
+      "url": "http://localhost:5173/register",
+      "file": "C:\\Users\\FORMACION\\Desktop\\avances-gestion-citas\\docs\\screenshots\\02-register.png"
+    },
+    {
+      "name": "03-forgot-password",
+      "loadTime": 2079,
+      "title": "gestion-citas",
+      "url": "http://localhost:5173/forgot-password",
+      "file": "C:\\Users\\FORMACION\\Desktop\\avances-gestion-citas\\docs\\screenshots\\03-forgot-password.png"
+    },
+    {
+      "name": "04-404",
+      "loadTime": 2049,
+      "title": "gestion-citas",
+      "url": "http://localhost:5173/nonexistent",
+      "file": "C:\\Users\\FORMACION\\Desktop\\avances-gestion-citas\\docs\\screenshots\\04-404.png"
+    },
+    {
+      "name": "05-unauthorized",
+      "loadTime": 2051,
+      "title": "gestion-citas",
+      "url": "http://localhost:5173/unauthorized",
+      "file": "C:\\Users\\FORMACION\\Desktop\\avances-gestion-citas\\docs\\screenshots\\05-unauthorized.png"
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "screenshots": [
+    "01-login.png",
+    "02-register.png",
+    "03-forgot-password.png",
+    "04-404.png",
+    "05-unauthorized.png",
+    "06-login-validation.png",
+    "07-register-profesional.png",
+    "08-register-weak-password.png",
+    "09-register-strong-password.png",
+    "10-mobile-login.png",
+    "11-mobile-register.png"
+  ]
+}

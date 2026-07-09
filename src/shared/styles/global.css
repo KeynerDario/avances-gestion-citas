@@ -1,10 +1,12 @@
 @import "./variables.css";
 @import "./buttons.css";
-@import "./layout.css";
 @import "./auth.css";
 @import "./appointments.css";
 @import "./admin.css";
 @import "./dashboard.css";
+@import "./dark-mode.css";
+@import "./skeleton.css";
+@import "./clean-layout.css";
 
 * {
   margin: 0;
@@ -12,7 +14,8 @@
   box-sizing: border-box;
 }
 
-html {
+html, body {
+  height: 100%;
   scroll-behavior: smooth;
 }
 
@@ -21,10 +24,269 @@ body {
   background-color: var(--sena-gray);
   color: var(--sena-dark);
   line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #root {
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+/* Error Boundary */
+.error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: var(--space-xl);
+}
+
+.error-boundary-content {
+  text-align: center;
+  max-width: 500px;
+  background: var(--sena-white);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  transition: background-color var(--transition-slow);
+}
+
+.error-icon {
+  color: var(--color-warning);
+  margin-bottom: var(--space-md);
+}
+
+.error-boundary-content h2 {
+  font-size: 1.5rem;
+  color: var(--sena-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.error-message {
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  margin-bottom: var(--space-lg);
+  word-break: break-word;
+}
+
+.error-actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+}
+
+/* ============================================ */
+/* GLOBAL ANIMATIONS                           */
+/* ============================================ */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ============================================ */
+/* ACCESSIBILITY                               */
+/* ============================================ */
+/* Unified focus ring — replaces all individual :focus rules */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Remove default outline from elements that use box-shadow focus */
+.input:focus-visible,
+.textarea:focus-visible,
+.select:focus-visible,
+.btn:focus-visible,
+.btn-icon:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Auto dark mode fallback si no hay data-theme */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-card: #1e293b;
+    --bg-input: #334155;
+    --bg-hover: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border-color: #334155;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+    --shadow-focus: 0 0 0 3px rgba(26, 92, 46, 0.2);
+    --sena-dark: #f1f5f9;
+    --sena-white: #1e293b;
+    --sena-gray: #0f172a;
+  }
+}
+
+/* ============================================ */
+/* SISTEMA DE INPUTS UNIFICADO                 */
+/* ============================================ */
+.input {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus-visible {
+  border-color: var(--border-focus);
+}
+
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Input con ícono izquierdo */
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-group .input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+  z-index: 1;
+  transition: color var(--transition-base);
+}
+
+.input-group.focused .input-icon {
+  color: var(--sena-green);
+}
+
+.input-group .input {
+  padding-left: 44px;
+}
+
+.input-group.focused .input {
+  border-color: var(--sena-green);
+  background: var(--bg-card);
+}
+
+/* Input con ícono derecho */
+.input-group .input-icon-right {
+  position: absolute;
+  right: 14px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Toggle password */
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.toggle-password:hover {
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+}
+
+/* Textarea */
+.textarea {
+  width: 100%;
+  padding: var(--space-3);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.textarea:focus-visible {
+  border-color: var(--border-focus);
+}
+
+/* Select */
+.select {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.select:focus-visible {
+  border-color: var(--border-focus);
+}
+
+/* Field error */
+.field-error {
+  color: var(--color-error);
+  font-size: var(--text-xs);
+  margin-top: var(--space-1);
+}
+
+/* Field hint */
+.field-hint {
+  color: var(--sena-green);
+  font-size: var(--text-xs);
+  margin-top: var(--space-1);
+}
+
+/* ============================================ */
+/* PROFILE ASIDE - MOBILE FIX                  */
+/* ============================================ */
+@media (max-width: 768px) {
+  .profile-aside {
+    width: 85vw !important;
+    max-width: 340px !important;
+  }
 }

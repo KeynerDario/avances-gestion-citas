@@ -1,0 +1,439 @@
+# DashboardLayout Component
+
+El `DashboardLayout` es un componente de diseño reutilizable que proporciona una navegación consistente, cabecera y área de contenido para todos los paneles de control de la aplicación.
+
+## Características principales
+
+- **Navegación lateral colapsable**: 256px expandida, 64px colapsada con funcionalidad de mouse-over
+- **Cabecera estandarizada**: Título + navegación de migas de pan + botones de acción
+- **Área de contenido flexible**: Para el contenido del dashboard con estados de carga y vacío
+- **Responsivo para móviles**: Menú lateral deslizante, cabecera adaptada para móviles
+- **Mínimos de área táctil de 44px**
+- **Accesible**: Etiquetas ARIA, navegación por teclado, soporte para lectores de pantalla
+- **Visible según rol**: Mostrar elementos de navegación según el rol del usuario
+- **Personalizable**: Acepta props para título, migas de pan, acciones y más
+
+## Instalación
+
+```bash
+npm install react lucide-react
+```
+
+## Importación
+
+```jsx
+import { DashboardLayout } from './shared/components/DashboardLayout';
+```
+
+## Props
+
+| Prop | Tipo | Requerido | Descripción |
+|------|------|----------|-------------|
+| `title` | string | Sí | Título del dashboard que aparece en la cabecera |
+| `breadcrumbs` | string[] | No (predeterminado: []) | Array de elementos de navegación de migas de pan |
+| `actions` | Array | No (predeterminado: []) | Array de objetos de acción con `label`, `onClick`, `icon`, etc. |
+| `userRole` | string | Sí | Rol del usuario para filtrar elementos de navegación (SUPERADMIN, COORDINACION, PROFESIONAL, APRENDIZ) |
+| `loading` | boolean | No (predeterminado: false) | Muestra estado de carga en el área de contenido |
+| `empty` | boolean | No (predeterminado: false) | Muestra estado vacío cuando no hay contenido |
+| `children` | React.ReactNode | Sí | Contenido del dashboard que se renderiza en el área principal |
+
+## Ejemplo Básico
+
+```jsx
+import { DashboardLayout } from './shared/components/DashboardLayout';
+
+export function MisDashboard() {
+  const actions = [
+    {
+      label: "Actualizar",
+      onClick: () => console.log("Actualizando..."),
+      icon: <RefreshCw size={16} />,
+    },
+    {
+      label: "Exportar",
+      onClick: () => console.log("Exportando..."),
+      icon: <Download size={16} />,
+    },
+  ];
+
+  return (
+    <DashboardLayout
+      title="Mi Dashboard"
+      breadcrumbs={["Dashboard", "Inicio"]}
+      actions={actions}
+      userRole="PROFESIONAL"
+      loading={false}
+      empty={false}
+    >
+      <div className="content">
+        <h2>Contenido del Dashboard</h2>
+        <p>Aquí va el contenido principal</p>
+      </div>
+    </DashboardLayout>
+  );
+}
+```
+
+## Estructura de Navegación
+
+El componente incluye un menú lateral con navegación organizada por roles. Los elementos de navegación están filtrados según el rol del usuario:
+
+- **SUPERADMIN**: Todos los elementos
+- **COORDINACION**: Inicio, Mis Citas, Agenda, Profesionales, Dependencias, Reportes
+- **PROFESIONAL**: Inicio, Mis Citas, Agenda
+- **APRENDIZ**: Inicio, Mis Citas
+
+### Elementos de Navegación
+
+| Elemento | Icono | Roles Permitidos |
+|---------|-------|-----------------|
+| Inicio | 🏠 | Todos |
+| Mis Citas | 📅 | Aprendiz, Profesional, Coordinación |
+| Agenda | 📆 | Profesional, Coordinación |
+| Profesionales | 👥 | Coordinación, Superadmin |
+| Usuarios | 👤 | Superadmin |
+| Dependencias | 🏢 | Superadmin, Coordinación |
+| Reportes | 📊 | Coordinación, Superadmin |
+
+## Ejemplos de Uso
+
+### AprendizDashboard
+
+```jsx
+import { DashboardLayout } from '../../../shared/components/DashboardLayout';
+
+export default function AprendizDashboard() {
+  const dashboardActions = [
+    {
+      label: "Actualizar",
+      onClick: fetchAppointments,
+      icon: <RefreshIcon />,
+    },
+    {
+      label: "Exportar",
+      onClick: () => {},
+      icon: <DownloadIcon />,
+    },
+  ];
+
+  return (
+    <DashboardLayout
+      title="Mis Citas de Bienestar"
+      breadcrumbs={["Dashboard", "Mis Citas"]}
+      actions={dashboardActions}
+      userRole="APRENDIZ"
+      loading={isLoading}
+      empty={appointments.length === 0}
+    >
+      {/* Contenido del AprendizDashboard */}
+      <div className="aprendiz-stats-row">
+        {/* ... elementos de estadísticas ... */}
+      </div>
+      {/* ... resto del contenido ... */}
+    </DashboardLayout>
+  );
+}
+```
+
+### ProfessionalDashboard
+
+```jsx
+import { DashboardLayout } from '../../../shared/components/DashboardLayout';
+
+export default function ProfessionalDashboard() {
+  const dashboardActions = [
+    {
+      label: "Actualizar",
+      onClick: refreshDayAgenda,
+      icon: <RefreshIcon />,
+    },
+  ];
+
+  return (
+    <DashboardLayout
+      title="Panel del Profesional"
+      breadcrumbs={["Dashboard", "Profesional"]}
+      actions={dashboardActions}
+      userRole="PROFESIONAL"
+      loading={isLoading}
+      empty={false}
+    >
+      {/* Contenido del ProfessionalDashboard */}
+      <div className="tabs-container">
+        {/* ... sistema de pestañas ... */}
+      </div>
+      {/* ... resto del contenido ... */}
+    </DashboardLayout>
+  );
+}
+```
+
+### CoordinationDashboard
+
+```jsx
+import { DashboardLayout } from '../../../shared/components/DashboardLayout';
+
+export default function CoordinationDashboard() {
+  const dashboardActions = [
+    {
+      label: "Actualizar",
+      onClick: fetchAllMetrics,
+      icon: <RefreshCw size={16} />,
+      variant: "primary",
+    },
+    {
+      label: "Exportar CSV",
+      onClick: exportToCSV,
+      icon: <Download size={16} />,
+    },
+  ];
+
+  return (
+    <DashboardLayout
+      title="Panel de Coordinación"
+      breadcrumbs={["Dashboard", "Coordinación"]}
+      actions={dashboardActions}
+      userRole="COORDINACION"
+      loading={loading}
+      empty={!kpis && !loading}
+    >
+      {/* Contenido del CoordinationDashboard */}
+      <div className="kpi-grid">
+        {/* ... tarjeta de KPI ... */}
+      </div>
+      {/* ... resto del contenido ... */}
+    </DashboardLayout>
+  );
+}
+```
+
+### AdminDashboard
+
+```jsx
+import { DashboardLayout } from '../../../shared/components/DashboardLayout';
+
+export default function AdminDashboard() {
+  const dashboardActions = [
+    {
+      label: "Actualizar",
+      onClick: loadStats,
+      icon: <RefreshCw size={16} />,
+    },
+  ];
+
+  return (
+    <DashboardLayout
+      title="Panel de Administración"
+      breadcrumbs={["Dashboard", "Administración"]}
+      actions={dashboardActions}
+      userRole="SUPERADMIN"
+      loading={false}
+      empty={false}
+    >
+      {/* Contenido del AdminDashboard */}
+      <div className="admin-tabs-container">
+        {/* ... sistema de pestañas ... */}
+      </div>
+      {/* ... resto del contenido ... */}
+    </DashboardLayout>
+  );
+}
+```
+
+## Personalización
+
+### Colores según rol
+
+El componente incluye colores específicos según el rol del usuario:
+
+- **Superadmin**: `var(--sena-green)`
+- **Coordinación**: `var(--color-info)` (azul)
+- **Profesional**: `var(--color-purple)`
+- **Aprendiz**: `var(--gray-600)`
+
+### Iconos de rol
+
+El componente incluye iconos específicos según el rol:
+
+- **Superadmin**: Shield (icono de protección)
+- **Coordinación**: Building2 (icono de edificio)
+- **Profesional**: Users (icono de usuarios)
+- **Aprendiz**: User (icono de usuario)
+
+### Características del estado de carga
+
+```jsx
+<DashboardLayout
+  ...
+  loading={isLoading}
+>
+  {/* El contenido se ocultará mientras loading sea true */}
+  <div className="content">Tu contenido aquí</div>
+</DashboardLayout>
+```
+
+### Características del estado vacío
+
+```jsx
+<DashboardLayout
+  ...
+  empty={data.length === 0}
+>
+  {/* El estado vacío se mostrará cuando empty sea true */}
+  <div className="content">Tu contenido aquí</div>
+</DashboardLayout>
+```
+
+## Estilos y Personalización
+
+El componente utiliza CSS custom properties desde `variables.css`:
+
+### Variables personalizadas
+
+- `--sidebar-width-expanded`: Ancho del sidebar expandido (256px)
+- `--sidebar-width-collapsed`: Ancho del sidebar colapsado (64px)
+- `--sidebar-mobile-width`: Ancho del sidebar en móvil (90% del ancho de pantalla)
+
+### Modo oscuro
+
+El componente es compatible con el modo oscuro a través del sistema de tema global:
+
+```css
+@media (prefers-color-scheme: dark) {
+  .dashboard-layout {
+    background: var(--bg-primary);
+  }
+  .dashboard-header {
+    background: var(--bg-secondary);
+  }
+  .dashboard-sidebar {
+    background: var(--bg-secondary);
+  }
+}
+```
+
+## Accesibilidad
+
+### Etiquetas ARIA
+
+El componente incluye:
+
+- `aria-label="Navegación principal"` en el elemento de navegación
+- `role="navigation"` en el elemento nav
+- `aria-current="page"` en el elemento de navegación activo
+- `aria-expanded` y `aria-controls` en el botón del sidebar para móviles
+
+### Navegación por teclado
+
+- **Tab**: Navegación por teclado a través de elementos interactivos
+- **Enter/Space**: Activación de elementos del menú y botones
+- **Flechas**: Navegación en el menú lateral (horizontal en móvil, vertical en desktop)
+- **Escape**: Cerrar menú móvil y dialogs
+
+### Soporte para lectores de pantalla
+
+- Todos los textos alternativos para iconos SVG
+- Estados de carga y vacío con `aria-live="polite"`
+- Anchos mínimos de área táctil de 44px en móvil
+- Etiquetas de título descriptivas
+
+## Estructura del DOM
+
+```html
+<div class="dashboard-layout">
+  <header class="dashboard-header">
+    <button class="mobile-menu-toggle">
+      <!-- Ícono del menú -->
+    </button>
+    <div class="header-left">
+      <nav class="breadcrumb-nav">
+        <!-- Elementos de migas de pan -->
+      </nav>
+      <h1 class="dashboard-title">Título</h1>
+    </div>
+    <div class="header-actions">
+      <!-- Botones de acción -->
+    </div>
+  </header>
+  
+  <aside class="dashboard-sidebar">
+    <!-- Contenido del sidebar -->
+  </aside>
+  
+  <main class="dashboard-main">
+    <div class="content-wrapper">
+      <div class="loading-state">Cargando...</div>
+      <div class="empty-state">Sin contenido</div>
+      <div class="content">Contenido principal</div>
+    </div>
+  </main>
+</div>
+```
+
+## Manejo de errores
+
+El componente incluye estado de carga y vacío:
+
+```jsx
+<DashboardLayout
+  loading={isLoading}
+  empty={!data && !loading}
+>
+  {data ? content : null}
+</DashboardLayout>
+```
+
+El estado de carga muestra un spinner con aria-live="polite" para lectores de pantalla.
+El estado vacío muestra un icono y mensaje descriptivo.
+
+## Guía de estilos
+
+### Requisitos CSS
+
+- **Framework**: No se basa en ningún framework CSS específico
+- **Variables personalizadas**: Utiliza todas las variables del sistema de diseño
+- **Móvil primero**: Las actualizaciones de estilos se hacen desde dispositivos móviles hacia arriba
+- **Modo oscuro**: Es compatible con el tema oscuro del sistema
+
+### Responsive Design
+
+- **Desktop**: Sidebar fijo a la izquierda, contenido principal con margen izquierdo
+- **Tablet (≤768px)**: Sidebar oculto por defecto, botón para abrir, deslizamiento desde la izquierda
+- **Móvil (≤768px)**: Sidebar deslizante, overlay de fondo, scroll interno para navegación larga
+
+### Transiciones
+
+- **Sidebar**: Transición suave entre estados expandido/colapsado
+- **Móvil**: Animación de deslizamiento para menú
+- **Contenido**: Transiciones de opacidad para estados de carga y vacío
+
+## Compatibilidad con navegadores
+
+El componente es compatible con navegadores modernos:
+
+- **Chrome 90+**
+- **Firefox 88+**
+- **Safari 14+**
+- **Edge 90+**
+- **Opera 76+**
+
+También incluye soporte para:
+- Animaciones de `prefers-reduced-motion`
+- Sobrescritura de temas automáticamente
+- Soporte para navegación por teclado
+- Etiquetas ARIA para lectores de pantalla
+
+## Actualizaciones futuras
+
+Se planean las siguientes mejoras:
+
+1. **Accesibilidad**: Navegación por teclado mejorada y etiquetas ARIA adicionales
+2. **Animaciones**: Animaciones más fluidas con Framer Motion
+3. **Gestos táctiles**: Gestos de swipe para menú móvil
+4. **Modo compacto**: Sidebar vertical minimalista para pantallas estrechas
+5. **Colores según rol**: Paleta de colores más diversa según el rol del usuario
+6. **Personas por rol**: Sección de personas para vista rápida en el sidebar
+
+## Archivo de licenciamiento
+
+Este componente está bajo la misma licencia que el resto de la aplicación (consulte el archivo de licenciamiento principal).

@@ -1,0 +1,192 @@
+{
+  "pages": [
+    {
+      "name": "Login",
+      "title": "gestion-citas",
+      "url": "http://localhost:5173/login",
+      "elements": {
+        "headings": 2,
+        "images": 0,
+        "buttons": 2,
+        "inputs": 2,
+        "links": 2,
+        "forms": 1,
+        "divs": 25
+      },
+      "issues": [
+        "Button without accessible text"
+      ],
+      "accessibility": {
+        "bodyBg": "rgb(245, 245, 245)",
+        "bodyColor": "rgb(26, 26, 26)",
+        "hasSkipLink": false,
+        "ariaRoles": 0,
+        "focusVisible": false,
+        "animatedElements": 0
+      },
+      "headings": [
+        {
+          "level": 2,
+          "text": "SENA Bienestar"
+        },
+        {
+          "level": 1,
+          "text": "Iniciar Sesión"
+        }
+      ],
+      "overflowingElements": [],
+      "inlineStyleCount": 0,
+      "pageHeight": 900,
+      "pageWidth": 1440
+    },
+    {
+      "name": "Register",
+      "title": "gestion-citas",
+      "url": "http://localhost:5173/register",
+      "elements": {
+        "headings": 2,
+        "images": 0,
+        "buttons": 2,
+        "inputs": 8,
+        "links": 1,
+        "forms": 1,
+        "divs": 31
+      },
+      "issues": [
+        "Button without accessible text"
+      ],
+      "accessibility": {
+        "bodyBg": "rgb(245, 245, 245)",
+        "bodyColor": "rgb(26, 26, 26)",
+        "hasSkipLink": false,
+        "ariaRoles": 0,
+        "focusVisible": false,
+        "animatedElements": 0
+      },
+      "headings": [
+        {
+          "level": 2,
+          "text": "SENA Bienestar"
+        },
+        {
+          "level": 1,
+          "text": "Crear Cuenta"
+        }
+      ],
+      "overflowingElements": [],
+      "inlineStyleCount": 0,
+      "pageHeight": 900,
+      "pageWidth": 1440
+    },
+    {
+      "name": "Forgot Password",
+      "title": "gestion-citas",
+      "url": "http://localhost:5173/forgot-password",
+      "elements": {
+        "headings": 2,
+        "images": 0,
+        "buttons": 1,
+        "inputs": 1,
+        "links": 1,
+        "forms": 1,
+        "divs": 23
+      },
+      "issues": [],
+      "accessibility": {
+        "bodyBg": "rgb(245, 245, 245)",
+        "bodyColor": "rgb(26, 26, 26)",
+        "hasSkipLink": false,
+        "ariaRoles": 0,
+        "focusVisible": true,
+        "animatedElements": 0
+      },
+      "headings": [
+        {
+          "level": 2,
+          "text": "SENA Bienestar"
+        },
+        {
+          "level": 1,
+          "text": "¿Olvidaste tu contraseña?"
+        }
+      ],
+      "overflowingElements": [],
+      "inlineStyleCount": 1,
+      "pageHeight": 900,
+      "pageWidth": 1440
+    },
+    {
+      "name": "Unauthorized",
+      "title": "gestion-citas",
+      "url": "http://localhost:5173/unauthorized",
+      "elements": {
+        "headings": 1,
+        "images": 0,
+        "buttons": 1,
+        "inputs": 0,
+        "links": 1,
+        "forms": 0,
+        "divs": 7
+      },
+      "issues": [],
+      "accessibility": {
+        "bodyBg": "rgb(245, 245, 245)",
+        "bodyColor": "rgb(26, 26, 26)",
+        "hasSkipLink": false,
+        "ariaRoles": 0,
+        "focusVisible": false,
+        "animatedElements": 0
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Acceso Denegado"
+        }
+      ],
+      "overflowingElements": [],
+      "inlineStyleCount": 0,
+      "pageHeight": 900,
+      "pageWidth": 1440
+    },
+    {
+      "name": "404 Not Found",
+      "title": "gestion-citas",
+      "url": "http://localhost:5173/nonexistent",
+      "elements": {
+        "headings": 1,
+        "images": 0,
+        "buttons": 1,
+        "inputs": 0,
+        "links": 1,
+        "forms": 0,
+        "divs": 8
+      },
+      "issues": [],
+      "accessibility": {
+        "bodyBg": "rgb(245, 245, 245)",
+        "bodyColor": "rgb(26, 26, 26)",
+        "hasSkipLink": false,
+        "ariaRoles": 0,
+        "focusVisible": false,
+        "animatedElements": 0
+      },
+      "headings": [
+        {
+          "level": 1,
+          "text": "Parece que te perdiste"
+        }
+      ],
+      "overflowingElements": [],
+      "inlineStyleCount": 0,
+      "pageHeight": 900,
+      "pageWidth": 1440
+    }
+  ],
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "networkErrors": [],
+  "designIssues": [],
+  "accessibilityIssues": [],
+  "responsiveIssues": [],
+  "codeIssues": []
+}

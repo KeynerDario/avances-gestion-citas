@@ -1,0 +1,206 @@
+[
+  {
+    "role": "SUPERADMIN",
+    "features": [
+      {
+        "name": "Login",
+        "ok": true,
+        "detail": "http://localhost:5173/admin"
+      },
+      {
+        "name": "Sidebar visible",
+        "ok": true
+      },
+      {
+        "name": "Nav items",
+        "ok": true,
+        "detail": "5 items"
+      },
+      {
+        "name": "Profile panel",
+        "ok": true
+      },
+      {
+        "name": "Dark mode",
+        "ok": true,
+        "detail": "dark"
+      },
+      {
+        "name": "Command palette",
+        "ok": true
+      },
+      {
+        "name": "Tab: users",
+        "ok": true
+      },
+      {
+        "name": "Tab: deps",
+        "ok": true
+      },
+      {
+        "name": "Tab: roles",
+        "ok": true
+      },
+      {
+        "name": "Tab: audit",
+        "ok": true
+      },
+      {
+        "name": "Tab: config",
+        "ok": true
+      },
+      {
+        "name": "Sidebar collapse",
+        "ok": false
+      },
+      {
+        "name": "Mobile responsive",
+        "ok": true
+      }
+    ],
+    "errors": []
+  },
+  {
+    "role": "COORDINACION",
+    "features": [
+      {
+        "name": "Login",
+        "ok": true,
+        "detail": "http://localhost:5173/coordination"
+      },
+      {
+        "name": "Sidebar visible",
+        "ok": true
+      },
+      {
+        "name": "Nav items",
+        "ok": true,
+        "detail": "3 items"
+      },
+      {
+        "name": "Profile panel",
+        "ok": true
+      },
+      {
+        "name": "Dark mode",
+        "ok": true,
+        "detail": "dark"
+      },
+      {
+        "name": "Command palette",
+        "ok": true
+      },
+      {
+        "name": "Advanced filters",
+        "ok": true
+      },
+      {
+        "name": "Export CSV",
+        "ok": true
+      },
+      {
+        "name": "Refresh",
+        "ok": true
+      },
+      {
+        "name": "Mobile responsive",
+        "ok": true
+      }
+    ],
+    "errors": []
+  },
+  {
+    "role": "PROFESIONAL",
+    "features": [
+      {
+        "name": "Login",
+        "ok": true,
+        "detail": "http://localhost:5173/professional"
+      },
+      {
+        "name": "Sidebar visible",
+        "ok": true
+      },
+      {
+        "name": "Nav items",
+        "ok": true,
+        "detail": "2 items"
+      },
+      {
+        "name": "Profile panel",
+        "ok": true
+      },
+      {
+        "name": "Dark mode",
+        "ok": true,
+        "detail": "dark"
+      },
+      {
+        "name": "Command palette",
+        "ok": true
+      },
+      {
+        "name": "Tab: pending",
+        "ok": true
+      },
+      {
+        "name": "Tab: history",
+        "ok": true
+      },
+      {
+        "name": "Tab: stats",
+        "ok": true
+      },
+      {
+        "name": "Tab: schedule",
+        "ok": true
+      },
+      {
+        "name": "Mobile responsive",
+        "ok": true
+      }
+    ],
+    "errors": []
+  },
+  {
+    "role": "APRENDIZ",
+    "features": [
+      {
+        "name": "Login",
+        "ok": true,
+        "detail": "http://localhost:5173/dashboard"
+      },
+      {
+        "name": "Sidebar visible",
+        "ok": true
+      },
+      {
+        "name": "Nav items",
+        "ok": true,
+        "detail": "2 items"
+      },
+      {
+        "name": "Profile panel",
+        "ok": true
+      },
+      {
+        "name": "Dark mode",
+        "ok": true,
+        "detail": "dark"
+      },
+      {
+        "name": "Command palette",
+        "ok": true
+      },
+      {
+        "name": "FAB button",
+        "ok": false
+      },
+      {
+        "name": "Mobile responsive",
+        "ok": true
+      }
+    ],
+    "errors": []
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "title": "Documento de Prueba",
+  "subtitle": "Generado por opencode",
+  "date": "2026-06-30",
+  "content": [
+    { "type": "heading", "level": 1, "text": "Introducción" },
+    { "type": "paragraph", "text": "Este es un documento de prueba para verificar que la skill de generación de documentos funciona correctamente." },
+    { "type": "spacer", "height": 10 },
+    { "type": "heading", "level": 2, "text": "Características" },
+    { "type": "list", "items": ["Genera documentos Word (.docx)", "Genera documentos PDF", "Soporta tablas y listas", "Formato profesional"] },
+    { "type": "line" },
+    { "type": "heading", "level": 2, "text": "Datos de Prueba" },
+    { "type": "table", "headers": ["Nombre", "Apellido", "Cédula"], "rows": [["Juan", "Pérez", "1234567890"], ["María", "Gómez", "0987654321"], ["Carlos", "López", "5555555555"]] },
+    { "type": "spacer", "height": 20 },
+    { "type": "heading", "level": 2, "text": "Conclusión" },
+    { "type": "paragraph", "text": "La skill está lista para generar documentos profesionales con tablas, listas y formato personalizado.", "italic": true }
+  ]
+}
