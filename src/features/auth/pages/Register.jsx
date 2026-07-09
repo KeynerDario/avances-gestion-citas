@@ -4,19 +4,8 @@ import { useAuth } from "../../../providers/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "../../../lib/supabase";
 import {
-  Mail,
-  Lock,
-  User,
-  CreditCard,
-  Loader2,
-  Eye,
-  EyeOff,
-  UserPlus,
-  CheckCircle,
-  GraduationCap,
-  Briefcase,
-  Users,
-  Info,
+  Mail, Lock, User, CreditCard, Loader2, Eye, EyeOff,
+  UserPlus, CheckCircle, GraduationCap, Briefcase, Users, Info, Shield,
 } from "lucide-react";
 
 export default function Register() {
@@ -83,9 +72,7 @@ export default function Register() {
     setLoading(false);
 
     if (result.success) {
-      toast.success(
-        "¡Registro exitoso! Ya puedes iniciar sesión.",
-      );
+      toast.success("¡Registro exitoso! Ya puedes iniciar sesión.");
       navigate("/login");
     }
   };
@@ -103,42 +90,47 @@ export default function Register() {
   return (
     <div className="auth-page">
       <a href="#register-form" className="skip-link">Saltar al formulario</a>
-      <div className="auth-left">
-        <div className="auth-brand">
-          <div className="auth-brand-icon">
-            <UserPlus size={32} strokeWidth={1.5} />
-          </div>
-          <h1>SENA Bienestar</h1>
-          <p className="auth-brand-desc">
-            Únete y agenda tus citas de bienestar
-          </p>
 
-          <div className="auth-cards">
-            <div className="auth-feature-card">
-              <div className="feature-icon"><UserPlus size={20} /></div>
-              <div>
-                <strong>Rápido y fácil</strong>
-                <span>Regístrate en segundos</span>
-              </div>
+      {/* LEFT PANEL */}
+      <div className="auth-left">
+        <div className="auth-left-inner">
+          <div className="auth-brand">
+            <div className="auth-brand-icon">
+              <UserPlus size={36} strokeWidth={1.5} />
             </div>
-            <div className="auth-feature-card">
-              <div className="feature-icon"><CheckCircle size={20} /></div>
-              <div>
-                <strong>Sin costos</strong>
-                <span>Servicio gratuito SENA</span>
+            <h1>SENA Bienestar</h1>
+            <p className="auth-brand-desc">
+              Únete y agenda tus citas de bienestar
+            </p>
+
+            <div className="auth-cards">
+              <div className="auth-feature-card">
+                <div className="feature-icon"><UserPlus size={20} /></div>
+                <div>
+                  <strong>Rápido y fácil</strong>
+                  <span>Regístrate en segundos</span>
+                </div>
               </div>
-            </div>
-            <div className="auth-feature-card">
-              <div className="feature-icon"><Lock size={20} /></div>
-              <div>
-                <strong>Datos seguros</strong>
-                <span>Protegemos tu información</span>
+              <div className="auth-feature-card">
+                <div className="feature-icon"><CheckCircle size={20} /></div>
+                <div>
+                  <strong>Sin costos</strong>
+                  <span>Servicio gratuito SENA</span>
+                </div>
+              </div>
+              <div className="auth-feature-card">
+                <div className="feature-icon"><Lock size={20} /></div>
+                <div>
+                  <strong>Datos seguros</strong>
+                  <span>Protegemos tu información</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      {/* RIGHT PANEL */}
       <div className="auth-right">
         <div className="auth-card auth-card-wide">
           <div className="auth-logo">
@@ -190,7 +182,7 @@ export default function Register() {
 
             <div className="role-selector">
               <label className="role-label">
-                <User size={18} />
+                <User size={16} />
                 ¿Cómo te identificas?
               </label>
               <div className="role-options">
@@ -241,7 +233,7 @@ export default function Register() {
               {formData.role === "PROFESIONAL" && (
                 <div className="dependency-selector">
                   <label className="role-label">
-                    <Briefcase size={18} />
+                    <Briefcase size={16} />
                     Selecciona tu dependencia
                   </label>
                   <div className="dependency-options">
@@ -326,7 +318,7 @@ export default function Register() {
                     />
                   ))}
                 </div>
-                <span style={{ color: strengthColors[passwordStrength], fontSize: "0.75rem", fontWeight: 500 }}>
+                <span className="strength-label" style={{ color: strengthColors[passwordStrength] }}>
                   {strengthLabels[passwordStrength]}
                 </span>
               </div>

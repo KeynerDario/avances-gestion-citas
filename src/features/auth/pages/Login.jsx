@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../../providers/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-import { Mail, Lock, LogIn, Loader2, Eye, EyeOff, ClipboardList, Stethoscope, BarChart3 } from "lucide-react";
+import { Mail, Lock, LogIn, Loader2, Eye, EyeOff, ClipboardList, Stethoscope, BarChart3, ArrowRight, Shield } from "lucide-react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -25,53 +25,58 @@ export default function Login() {
   return (
     <div className="auth-page">
       <a href="#login-form" className="skip-link">Saltar al formulario</a>
+
+      {/* LEFT PANEL */}
       <div className="auth-left">
-        <div className="auth-brand">
-          <div className="auth-brand-icon">
-            <LogIn size={32} strokeWidth={1.5} />
-          </div>
-          <h1>SENA Bienestar</h1>
-          <p className="auth-brand-desc">
-            Sistema de Gestión de Citas de Bienestar
-          </p>
+        <div className="auth-left-inner">
+          <div className="auth-brand">
+            <div className="auth-brand-icon">
+              <Shield size={36} strokeWidth={1.5} />
+            </div>
+            <h1>SENA Bienestar</h1>
+            <p className="auth-brand-desc">
+              Sistema de Gestión de Citas de Bienestar
+            </p>
 
-          <div className="auth-cards">
-            <div className="auth-feature-card">
-              <div className="feature-icon"><ClipboardList size={20} /></div>
-              <div>
-                <strong>Agenda tus citas</strong>
-                <span>Reserva cuando tú quieras</span>
+            <div className="auth-cards">
+              <div className="auth-feature-card">
+                <div className="feature-icon"><ClipboardList size={20} /></div>
+                <div>
+                  <strong>Agenda tus citas</strong>
+                  <span>Reserva cuando tú quieras</span>
+                </div>
+              </div>
+              <div className="auth-feature-card">
+                <div className="feature-icon"><Stethoscope size={20} /></div>
+                <div>
+                  <strong>Profesionales</strong>
+                  <span>Psicología, Enfermería y más</span>
+                </div>
+              </div>
+              <div className="auth-feature-card">
+                <div className="feature-icon"><BarChart3 size={20} /></div>
+                <div>
+                  <strong>Seguimiento</strong>
+                  <span>Monitorea tu progreso</span>
+                </div>
               </div>
             </div>
-            <div className="auth-feature-card">
-              <div className="feature-icon"><Stethoscope size={20} /></div>
-              <div>
-                <strong>Profesionales</strong>
-                <span>Psicología, Enfermería y más</span>
-              </div>
-            </div>
-            <div className="auth-feature-card">
-              <div className="feature-icon"><BarChart3 size={20} /></div>
-              <div>
-                <strong>Seguimiento</strong>
-                <span>Monitorea tu progreso</span>
-              </div>
-            </div>
-          </div>
 
-          <div className="auth-brand-footer">
-            <span>Plataforma institucional SENA</span>
+            <div className="auth-brand-footer">
+              <span>Plataforma institucional SENA</span>
+            </div>
           </div>
         </div>
       </div>
 
+      {/* RIGHT PANEL */}
       <div className="auth-right">
         <div className="auth-card">
           <div className="auth-logo">
             <div className="logo-icon">S</div>
           </div>
 
-          <h2>Iniciar Sesión</h2>
+          <h2>Bienvenido de vuelta</h2>
           <p className="auth-subtitle">
             Ingresa tus credenciales para acceder al sistema
           </p>
@@ -134,7 +139,10 @@ export default function Login() {
                   Entrando...
                 </>
               ) : (
-                "Iniciar Sesión"
+                <>
+                  Iniciar Sesión
+                  <ArrowRight size={18} />
+                </>
               )}
             </button>
           </form>
