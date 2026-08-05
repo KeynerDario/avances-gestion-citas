@@ -1,0 +1,212 @@
+{
+  "timestamp": "2026-07-15T13:56:35.214Z",
+  "users": [
+    {
+      "role": "SUPERADMIN",
+      "email": "admin@test.com",
+      "loginOk": true,
+      "tests": [
+        {
+          "test": "Tabs de administración",
+          "passed": true
+        },
+        {
+          "test": "Tab users cargado",
+          "passed": true
+        },
+        {
+          "test": "Tab deps cargado",
+          "passed": true
+        },
+        {
+          "test": "Tab roles cargado",
+          "passed": true
+        },
+        {
+          "test": "Tab audit cargado",
+          "passed": true
+        },
+        {
+          "test": "Tab config cargado",
+          "passed": true
+        },
+        {
+          "test": "Panel perfil abierto",
+          "passed": true
+        },
+        {
+          "test": "Command palette (Ctrl+K)",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "role": "COORDINACION",
+      "email": "coordinacion@test.com",
+      "loginOk": true,
+      "tests": [
+        {
+          "test": "KPIs visibles",
+          "passed": true
+        },
+        {
+          "test": "Filtros avanzados",
+          "passed": true
+        },
+        {
+          "test": "Botón exportar",
+          "passed": true
+        },
+        {
+          "test": "Botón actualizar",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "role": "PROFESIONAL",
+      "email": "profesional@test.com",
+      "loginOk": true,
+      "tests": [
+        {
+          "test": "Tab agenda",
+          "passed": true
+        },
+        {
+          "test": "Tab pending",
+          "passed": true
+        },
+        {
+          "test": "Tab history",
+          "passed": true
+        },
+        {
+          "test": "Tab stats",
+          "passed": true
+        },
+        {
+          "test": "Tab schedule",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "role": "APRENDIZ",
+      "email": "aprendiz@test.com",
+      "loginOk": true,
+      "tests": [
+        {
+          "test": "Tabs de estado",
+          "passed": true
+        },
+        {
+          "test": "Botón FAB (nueva cita)",
+          "passed": true
+        },
+        {
+          "test": "Estado vacío visible",
+          "passed": true
+        },
+        {
+          "test": "Responsive móvil",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "totalTests": 43,
+    "passed": 43,
+    "failed": 0
+  },
+  "publicTests": [
+    {
+      "test": "Email input existe",
+      "passed": true
+    },
+    {
+      "test": "Password input existe",
+      "passed": true
+    },
+    {
+      "test": "Botón login existe",
+      "passed": true
+    },
+    {
+      "test": "Link forgot password",
+      "passed": true
+    },
+    {
+      "test": "Link register",
+      "passed": true
+    },
+    {
+      "test": "Branding lateral",
+      "passed": true
+    },
+    {
+      "test": "Muestra error con credenciales inválidas",
+      "passed": true
+    },
+    {
+      "test": "Input nombre",
+      "passed": true
+    },
+    {
+      "test": "Input documento",
+      "passed": true
+    },
+    {
+      "test": "Input email",
+      "passed": true
+    },
+    {
+      "test": "Input contraseña",
+      "passed": true
+    },
+    {
+      "test": "Input confirmar contraseña",
+      "passed": true
+    },
+    {
+      "test": "Opciones de rol (3)",
+      "passed": true
+    },
+    {
+      "test": "Selector dependencia para profesional",
+      "passed": true
+    },
+    {
+      "test": "Input email",
+      "passed": true
+    },
+    {
+      "test": "Botón enviar",
+      "passed": true
+    },
+    {
+      "test": "Link volver login",
+      "passed": true
+    },
+    {
+      "test": "Redirige a login sin sesión activa",
+      "passed": true
+    },
+    {
+      "test": "Formulario accesible vía recovery",
+      "passed": true
+    },
+    {
+      "test": "Muestra código 404",
+      "passed": true
+    },
+    {
+      "test": "Link volver inicio",
+      "passed": true
+    },
+    {
+      "test": "Muestra código 403",
+      "passed": true
+    }
+  ]
+}

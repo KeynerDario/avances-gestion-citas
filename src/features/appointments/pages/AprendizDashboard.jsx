@@ -96,22 +96,30 @@ export default function AprendizDashboard() {
         {appointments.length > 0 && (
           <div className="stats-grid">
             <div className="stat-item">
-              <Clock size={16} />
+              <div className="stat-icon-wrap" style={{ background: "#fef3c7" }}>
+                <Clock size={18} style={{ color: "#f59e0b" }} />
+              </div>
               <span className="stat-count">{counts.pending}</span>
               <span className="stat-label">Esperando respuesta</span>
             </div>
             <div className="stat-item">
-              <CheckCircle size={16} className="blue" />
+              <div className="stat-icon-wrap" style={{ background: "#dbeafe" }}>
+                <CheckCircle size={18} style={{ color: "#3b82f6" }} />
+              </div>
               <span className="stat-count">{counts.confirmed}</span>
               <span className="stat-label">Listas para ti</span>
             </div>
             <div className="stat-item">
-              <CheckCircle size={16} className="green" />
+              <div className="stat-icon-wrap" style={{ background: "#dcfce7" }}>
+                <CheckCircle size={18} style={{ color: "#22c55e" }} />
+              </div>
               <span className="stat-count">{counts.completed}</span>
               <span className="stat-label">Ya atendidas</span>
             </div>
             <div className="stat-item">
-              <XCircle size={16} className="red" />
+              <div className="stat-icon-wrap" style={{ background: "#fee2e2" }}>
+                <XCircle size={18} style={{ color: "#ef4444" }} />
+              </div>
               <span className="stat-count">{counts.cancelled + counts.no_show}</span>
               <span className="stat-label">No se concretaron</span>
             </div>

@@ -1,70 +1,69 @@
 /* ============================================ */
-/* DARK MODE - Refined Professional Theme       */
+/* DARK MODE                                    */
 /* ============================================ */
 
-/* --- Semantic Tokens Override --- */
 [data-theme="dark"] {
-  /* Backgrounds - Deep navy tones, not pure black */
-  --bg-primary: #0c1222;
-  --bg-secondary: #131b2e;
-  --bg-card: #162032;
-  --bg-input: #1a2540;
-  --bg-hover: #1e2d4a;
+  /* Backgrounds - Grises neutros, sin tinte azul */
+  --bg-primary: #121212;
+  --bg-secondary: #1a1a1a;
+  --bg-card: #1e1e1e;
+  --bg-input: #252525;
+  --bg-hover: #2a2a2a;
 
-  /* Text - Warm whites for less eye strain */
-  --text-primary: #e8ecf4;
-  --text-secondary: #8b95ad;
-  --text-muted: #5a6478;
+  /* Text */
+  --text-primary: #e0e0e0;
+  --text-secondary: #999999;
+  --text-muted: #666666;
 
-  /* Borders - Subtle but visible */
-  --border-color: #1e2d4a;
-  --border-focus: #2d8a4e;
+  /* Borders */
+  --border-color: #333333;
+  --border-focus: #1a5c2e;
 
-  /* Shadows - Deeper for depth */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.45);
-  --shadow-focus: 0 0 0 3px rgba(45, 138, 78, 0.25);
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 8px 16px rgba(0, 0, 0, 0.35);
+  --shadow-focus: 0 0 0 2px rgba(26, 92, 46, 0.3);
 
-  /* SENA Green - Slightly brighter for dark bg */
-  --green: #2d8a4e;
-  --green-hover: #236b3c;
-  --sena-green: #2d8a4e;
-  --sena-green-hover: #236b3c;
-  --sena-green-light: rgba(45, 138, 78, 0.12);
+  /* SENA Green */
+  --green: #2e7d42;
+  --green-hover: #256434;
+  --sena-green: #2e7d42;
+  --sena-green-hover: #256434;
+  --sena-green-light: rgba(46, 125, 66, 0.15);
 
   /* Semantic inversions */
-  --sena-dark: #e8ecf4;
-  --sena-white: #131b2e;
-  --sena-gray: #0c1222;
+  --sena-dark: #e0e0e0;
+  --sena-white: #1a1a1a;
+  --sena-gray: #121212;
 
-  /* Status backgrounds - Muted but distinct */
-  --status-pending-bg: rgba(251, 191, 36, 0.1);
-  --status-pending-text: #fbbf24;
-  --status-confirmed-bg: rgba(96, 165, 250, 0.1);
-  --status-confirmed-text: #60a5fa;
-  --status-completed-bg: rgba(52, 211, 153, 0.1);
-  --status-completed-text: #34d399;
-  --status-cancelled-bg: rgba(156, 163, 175, 0.1);
+  /* Status backgrounds */
+  --status-pending-bg: rgba(245, 158, 11, 0.12);
+  --status-pending-text: #f59e0b;
+  --status-confirmed-bg: rgba(59, 130, 246, 0.12);
+  --status-confirmed-text: #3b82f6;
+  --status-completed-bg: rgba(34, 197, 94, 0.12);
+  --status-completed-text: #22c55e;
+  --status-cancelled-bg: rgba(156, 163, 175, 0.12);
   --status-cancelled-text: #9ca3af;
-  --status-no-show-bg: rgba(248, 113, 113, 0.1);
-  --status-no-show-text: #f87171;
+  --status-no-show-bg: rgba(239, 68, 68, 0.12);
+  --status-no-show-text: #ef4444;
 
-  /* Semantic colors - Slightly adjusted for dark */
-  --color-success: #34d399;
-  --color-success-light: rgba(52, 211, 153, 0.12);
-  --color-warning: #fbbf24;
-  --color-warning-light: rgba(251, 191, 36, 0.12);
-  --color-error: #f87171;
-  --color-error-light: rgba(248, 113, 113, 0.12);
-  --color-info: #60a5fa;
-  --color-info-light: rgba(96, 165, 250, 0.12);
-  --color-purple: #a78bfa;
-  --color-purple-light: rgba(167, 139, 250, 0.12);
+  /* Semantic colors */
+  --color-success: #22c55e;
+  --color-success-light: rgba(34, 197, 94, 0.12);
+  --color-warning: #f59e0b;
+  --color-warning-light: rgba(245, 158, 11, 0.12);
+  --color-error: #ef4444;
+  --color-error-light: rgba(239, 68, 68, 0.12);
+  --color-info: #3b82f6;
+  --color-info-light: rgba(59, 130, 246, 0.12);
+  --color-purple: #8b5cf6;
+  --color-purple-light: rgba(139, 92, 246, 0.12);
 }
 
-/* --- Global Elements --- */
+/* --- Global --- */
 [data-theme="dark"] body {
   background: var(--bg-primary);
   color: var(--text-primary);
@@ -75,29 +74,21 @@
 }
 
 [data-theme="dark"] ::selection {
-  background: rgba(45, 138, 78, 0.35);
-  color: #e8ecf4;
+  background: rgba(26, 92, 46, 0.4);
+  color: #e0e0e0;
 }
 
-/* ============================================ */
-/* AUTH PAGES - Dark Theme                      */
-/* ============================================ */
+/* --- Auth Pages --- */
 [data-theme="dark"] .auth-page {
   background: var(--bg-primary);
 }
 
 [data-theme="dark"] .auth-left {
-  background: linear-gradient(135deg, #0a1628 0%, #132040 50%, #0d2818 100%);
+  background: #1a1a1a;
 }
 
 [data-theme="dark"] .auth-left::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 20% 80%, rgba(45, 138, 78, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.06) 0%, transparent 50%);
-  pointer-events: none;
+  display: none;
 }
 
 [data-theme="dark"] .auth-right {
@@ -107,7 +98,7 @@
 [data-theme="dark"] .auth-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .auth-card h1,
@@ -120,19 +111,19 @@
 }
 
 [data-theme="dark"] .auth-error {
-  background: rgba(248, 113, 113, 0.1);
-  border-color: rgba(248, 113, 113, 0.25);
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
   color: #fca5a5;
 }
 
 [data-theme="dark"] .logo-icon {
   background: var(--sena-green);
-  box-shadow: 0 4px 12px rgba(45, 138, 78, 0.3);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .auth-feature-card {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.06);
+  background: var(--bg-input);
+  border-color: var(--border-color);
 }
 
 [data-theme="dark"] .auth-feature-card strong {
@@ -144,13 +135,11 @@
 }
 
 [data-theme="dark"] .feature-icon {
-  background: rgba(45, 138, 78, 0.15);
-  color: #34d399;
+  background: rgba(46, 125, 66, 0.15);
+  color: #22c55e;
 }
 
-/* ============================================ */
-/* FORM ELEMENTS - Dark Theme                   */
-/* ============================================ */
+/* --- Form Elements --- */
 [data-theme="dark"] .input-group input,
 [data-theme="dark"] .auth-form .input-group input {
   background: var(--bg-input);
@@ -166,7 +155,7 @@
 [data-theme="dark"] .auth-form .input-group.focused input {
   background: var(--bg-card);
   border-color: var(--sena-green);
-  box-shadow: 0 0 0 3px rgba(45, 138, 78, 0.15);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .auth-form .input-group.focused .input-icon {
@@ -184,21 +173,19 @@
 
 [data-theme="dark"] .btn-login {
   background: var(--sena-green);
-  box-shadow: 0 2px 8px rgba(45, 138, 78, 0.25);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .btn-login:hover {
   background: var(--sena-green-hover);
-  box-shadow: 0 4px 12px rgba(45, 138, 78, 0.35);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .btn-login:active {
   background: #1a5c2e;
 }
 
-/* ============================================ */
-/* ROLE SELECTOR - Dark Theme                   */
-/* ============================================ */
+/* --- Role Selector --- */
 [data-theme="dark"] .role-card {
   background: var(--bg-input);
   border-color: var(--border-color);
@@ -227,7 +214,7 @@
 
 [data-theme="dark"] .role-option.selected .role-card {
   border-color: var(--sena-green);
-  background: rgba(45, 138, 78, 0.08);
+  background: rgba(46, 125, 66, 0.1);
 }
 
 [data-theme="dark"] .role-option.selected .role-card svg {
@@ -254,12 +241,12 @@
 
 [data-theme="dark"] .dependency-option.selected .dependency-card {
   border-color: var(--sena-green);
-  background: rgba(45, 138, 78, 0.08);
+  background: rgba(46, 125, 66, 0.1);
 }
 
 [data-theme="dark"] .role-notice {
-  background: rgba(251, 191, 36, 0.08);
-  border-color: rgba(251, 191, 36, 0.2);
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.25);
   color: #fbbf24;
 }
 
@@ -267,9 +254,7 @@
   background: var(--border-color);
 }
 
-/* ============================================ */
-/* OTHER ELEMENTS - Dark Theme                  */
-/* ============================================ */
+/* --- Other Elements --- */
 [data-theme="dark"] .auth-divider::before,
 [data-theme="dark"] .auth-divider::after {
   background: var(--border-color);
@@ -295,7 +280,7 @@
 
 [data-theme="dark"] .auth-link:hover {
   color: var(--sena-green-hover);
-  background: rgba(45, 138, 78, 0.1);
+  background: rgba(46, 125, 66, 0.1);
 }
 
 [data-theme="dark"] .reset-tips {
@@ -307,9 +292,7 @@
   color: var(--text-primary);
 }
 
-/* ============================================ */
-/* SIDEBAR - Dark Theme Enhancements            */
-/* ============================================ */
+/* --- Sidebar --- */
 [data-theme="dark"] .sidebar {
   border-right-color: var(--border-color);
 }
@@ -328,7 +311,7 @@
 }
 
 [data-theme="dark"] .sidebar-link.active {
-  background: rgba(45, 138, 78, 0.12);
+  background: rgba(46, 125, 66, 0.15);
   color: var(--sena-green);
 }
 
@@ -358,9 +341,7 @@
   border-top-color: var(--border-color);
 }
 
-/* ============================================ */
-/* PROFILE PANEL - Dark Theme                   */
-/* ============================================ */
+/* --- Profile Panel --- */
 [data-theme="dark"] .sidebar-menu-item {
   color: var(--text-secondary);
 }
@@ -371,11 +352,11 @@
 }
 
 [data-theme="dark"] .sidebar-logout-btn {
-  color: #f87171;
+  color: #ef4444;
 }
 
 [data-theme="dark"] .sidebar-logout-btn:hover {
-  background: rgba(248, 113, 113, 0.1);
+  background: rgba(239, 68, 68, 0.1);
 }
 
 [data-theme="dark"] .sidebar-menu-divider {
@@ -392,7 +373,7 @@
 }
 
 [data-theme="dark"] .sidebar-back-btn:hover {
-  background: rgba(45, 138, 78, 0.15);
+  background: rgba(46, 125, 66, 0.15);
   color: var(--sena-green);
 }
 
@@ -404,7 +385,7 @@
 
 [data-theme="dark"] .sidebar-field-input:focus {
   border-color: var(--sena-green);
-  box-shadow: 0 0 0 3px rgba(45, 138, 78, 0.15);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .sidebar-save-btn {
@@ -434,22 +415,20 @@
 }
 
 [data-theme="dark"] .sidebar-radio-btn.active {
-  background: rgba(45, 138, 78, 0.12);
+  background: rgba(46, 125, 66, 0.15);
   border-color: var(--sena-green);
   color: var(--sena-green);
 }
 
-/* ============================================ */
-/* SCROLLBAR - Dark Theme                       */
-/* ============================================ */
+/* --- Scrollbar --- */
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--text-muted) var(--border-color);
 }
 
 html::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 html::-webkit-scrollbar-track {
@@ -458,7 +437,7 @@ html::-webkit-scrollbar-track {
 
 html::-webkit-scrollbar-thumb {
   background-color: var(--text-muted);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 html::-webkit-scrollbar-thumb:hover {
@@ -466,24 +445,22 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 [data-theme="dark"] html {
-  scrollbar-color: #3a4560 #131b2e;
+  scrollbar-color: #444 #1a1a1a;
 }
 
 [data-theme="dark"] html::-webkit-scrollbar-track {
-  background: #131b2e;
+  background: #1a1a1a;
 }
 
 [data-theme="dark"] html::-webkit-scrollbar-thumb {
-  background-color: #3a4560;
+  background-color: #444;
 }
 
 [data-theme="dark"] html::-webkit-scrollbar-thumb:hover {
-  background-color: #4a5570;
+  background-color: #555;
 }
 
-/* ============================================ */
-/* TOPBAR - Dark Theme                          */
-/* ============================================ */
+/* --- Topbar --- */
 [data-theme="dark"] .topbar {
   background: var(--bg-secondary);
   border-bottom-color: var(--border-color);
@@ -504,9 +481,7 @@ html::-webkit-scrollbar-thumb:hover {
   color: var(--text-secondary);
 }
 
-/* ============================================ */
-/* CARDS & COMMON - Dark Theme                  */
-/* ============================================ */
+/* --- Cards & Common --- */
 [data-theme="dark"] .kpi-card,
 [data-theme="dark"] .chart-card,
 [data-theme="dark"] .admin-stat-card {

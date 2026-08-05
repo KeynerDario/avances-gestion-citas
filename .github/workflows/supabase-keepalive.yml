@@ -1,0 +1,48 @@
+# Supabase Keep-Alive — Workflow de respaldo
+#
+# Mantiene activa la DB de Supabase (plan gratuito se pausa tras 7 días).
+# Corre cada 2 días + manual con workflow_dispatch.
+#
+# IMPORTANTE:
+# - Solo corre desde la rama main (el cron se desactiva en otras ramas).
+# - GitHub desactiva schedules si el repo pasa ~60 días sin commits en main.
+#   Por eso el Worker de Cloudflare es el mecanismo PRINCIPAL.
+# - Las secrets (SUPABASE_URL, SUPABASE_ANON_KEY) deben configurarse en
+#   Settings > Secrets and variables > Actions del repositorio.
+
+name: Supabase Keep-Alive
+
+on:
+  schedule:
+    # Cada 2 días a las 12:00 UTC
+    - cron: "0 12 */2 * *"
+  workflow_dispatch: # Botón "Run workflow" manual
+
+jobs:
+  keepalive:
+    name: Ping Supabase
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Ping Supabase REST API
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          echo "🏓 Ping a Supabase para keep-alive..."
+          HTTP_CODE=$(curl -s -o /tmp/response.txt -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/dependencies?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
+
+          echo "HTTP Status: $HTTP_CODE"
+          cat /tmp/response.txt
+          echo ""
+
+          if [ "$HTTP_CODE" -ne 200 ]; then
+            echo "❌ ERROR: Supabase respondió $HTTP_CODE"
+            exit 1
+          fi
+
+          echo "✅ Supabase activo — respondió 200 OK"

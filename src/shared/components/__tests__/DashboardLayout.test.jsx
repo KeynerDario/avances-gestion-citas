@@ -91,15 +91,17 @@ describe("DashboardLayout", () => {
     expect(screen.getByText("Test Content")).toBeInTheDocument();
   });
 
-  it("toggles sidebar collapse on desktop", () => {
+  it("toggles sidebar collapse with keyboard shortcut", () => {
     Object.defineProperty(window, "innerWidth", {
       writable: true,
       value: 1200,
     });
     renderWithProviders(<DashboardLayout {...defaultProps} />);
-    const sidebarToggle = screen.getByRole("button", { name: /Contraer menú/i });
-    fireEvent.click(sidebarToggle);
-    expect(screen.getByRole("button", { name: /Expandir menú/i })).toBeInTheDocument();
+    const sidebar = document.querySelector(".sidebar");
+    expect(sidebar).toBeInTheDocument();
+    expect(sidebar.classList.contains("collapsed")).toBe(false);
+    fireEvent.keyDown(document, { key: "b", ctrlKey: true });
+    expect(sidebar.classList.contains("collapsed")).toBe(true);
   });
 
   it("shows actions buttons", () => {
@@ -126,7 +128,7 @@ describe("DashboardLayout", () => {
     const { container } = renderWithProviders(
       <DashboardLayout {...defaultProps} userRole="APRENDIZ" />
     );
-    const navItems = container.querySelectorAll(".nav-item");
+    const navItems = container.querySelectorAll(".sidebar-link");
     expect(navItems.length).toBeGreaterThan(0);
   });
 
@@ -142,6 +144,6 @@ describe("DashboardLayout", () => {
 
   it("renders sidebar with proper ARIA labels", () => {
     renderWithProviders(<DashboardLayout {...defaultProps} />);
-    expect(screen.getByLabelText("Navegación principal")).toBeInTheDocument();
+    expect(screen.getByLabelText("Navegación")).toBeInTheDocument();
   });
 });

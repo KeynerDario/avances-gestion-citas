@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../../providers/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-import { Mail, Lock, LogIn, Loader2, Eye, EyeOff, ClipboardList, Stethoscope, BarChart3, ArrowRight, Shield } from "lucide-react";
+import { Mail, Lock, LogIn, Loader2, Eye, EyeOff, ClipboardList, Stethoscope, BarChart3, ArrowRight, Shield, Check } from "lucide-react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -17,59 +17,50 @@ export default function Login() {
     setLoading(true);
     const result = await signIn(email, password);
     setLoading(false);
-    if (result.success) {
-      navigate("/");
-    }
+    if (result.success) navigate("/");
   };
 
   return (
     <div className="auth-page">
       <a href="#login-form" className="skip-link">Saltar al formulario</a>
 
-      {/* LEFT PANEL */}
+      {/* LEFT — Branding */}
       <div className="auth-left">
         <div className="auth-left-inner">
           <div className="auth-brand">
             <div className="auth-brand-icon">
-              <Shield size={36} strokeWidth={1.5} />
+              <Shield size={38} strokeWidth={1.5} />
             </div>
             <h1>SENA Bienestar</h1>
             <p className="auth-brand-desc">
-              Sistema de Gestión de Citas de Bienestar
+              Plataforma integral de gestión de citas para el bienestar de la comunidad SENA
             </p>
 
             <div className="auth-cards">
-              <div className="auth-feature-card">
-                <div className="feature-icon"><ClipboardList size={20} /></div>
-                <div>
-                  <strong>Agenda tus citas</strong>
-                  <span>Reserva cuando tú quieras</span>
+              {[
+                { icon: ClipboardList, title: "Agenda tus citas", desc: "Reserva en cualquier momento" },
+                { icon: Stethoscope, title: "Profesionales", desc: "Psicología, Enfermería y más" },
+                { icon: BarChart3, title: "Seguimiento", desc: "Monitorea tu progreso" },
+              ].map(({ icon: Icon, title, desc }) => (
+                <div className="auth-feature-card" key={title}>
+                  <div className="feature-icon"><Icon size={20} /></div>
+                  <div>
+                    <strong>{title}</strong>
+                    <span>{desc}</span>
+                  </div>
+                  <Check size={14} className="feature-check" />
                 </div>
-              </div>
-              <div className="auth-feature-card">
-                <div className="feature-icon"><Stethoscope size={20} /></div>
-                <div>
-                  <strong>Profesionales</strong>
-                  <span>Psicología, Enfermería y más</span>
-                </div>
-              </div>
-              <div className="auth-feature-card">
-                <div className="feature-icon"><BarChart3 size={20} /></div>
-                <div>
-                  <strong>Seguimiento</strong>
-                  <span>Monitorea tu progreso</span>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="auth-brand-footer">
-              <span>Plataforma institucional SENA</span>
+              Plataforma institucional SENA — Servicio de Bienestar
             </div>
           </div>
         </div>
       </div>
 
-      {/* RIGHT PANEL */}
+      {/* RIGHT — Form */}
       <div className="auth-right">
         <div className="auth-card">
           <div className="auth-logo">
@@ -117,13 +108,7 @@ export default function Login() {
                 required
                 autoComplete="current-password"
               />
-              <button
-                type="button"
-                className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
-                tabIndex={-1}
-              >
+              <button type="button" className="toggle-password" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Ocultar" : "Mostrar"} tabIndex={-1}>
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
@@ -134,28 +119,17 @@ export default function Login() {
 
             <button type="submit" className="btn-login" disabled={loading}>
               {loading ? (
-                <>
-                  <Loader2 className="spin" size={18} />
-                  Entrando...
-                </>
+                <><Loader2 className="spin" size={18} /> Entrando...</>
               ) : (
-                <>
-                  Iniciar Sesión
-                  <ArrowRight size={18} />
-                </>
+                <>Iniciar Sesión <ArrowRight size={18} /></>
               )}
             </button>
           </form>
 
-          <div className="auth-divider">
-            <span>o</span>
-          </div>
+          <div className="auth-divider"><span>o</span></div>
 
           <p className="auth-footer">
-            ¿No tienes cuenta?{" "}
-            <Link to="/register" className="auth-link">
-              Regístrate aquí
-            </Link>
+            ¿No tienes cuenta? <Link to="/register" className="auth-link">Regístrate aquí</Link>
           </p>
         </div>
       </div>

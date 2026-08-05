@@ -24,3 +24,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cloudflare Worker (keepalive)
+workers/supabase-keepalive/node_modules
+workers/supabase-keepalive/package-lock.json
+workers/supabase-keepalive/package.json

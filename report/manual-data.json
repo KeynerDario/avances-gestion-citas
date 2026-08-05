@@ -1,0 +1,527 @@
+{
+  "title": "Manual de Usuario",
+  "subtitle": "SENA Bienestar - Sistema de Gestión de Citas",
+  "date": "15/7/2026",
+  "content": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "Manual de Usuario"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "Sistema de Gestión de Citas - SENA Bienestar"
+    },
+    {
+      "type": "paragraph",
+      "text": "Documento generado automáticamente con capturas reales de la aplicación.",
+      "italic": true
+    },
+    {
+      "type": "spacer",
+      "height": 10
+    },
+    {
+      "type": "paragraph",
+      "text": "Fecha de generación: 15 de julio de 2026"
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "1. Introducción"
+    },
+    {
+      "type": "paragraph",
+      "text": "El Sistema de Gestión de Citas SENA Bienestar es una plataforma web diseñada para facilitar la agendación y seguimiento de citas de bienestar para la comunidad del SENA. Permite a aprendices, profesionales de salud, coordinadores y administradores gestionar citas de forma eficiente y segura."
+    },
+    {
+      "type": "spacer",
+      "height": 10
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "2. Acceso al Sistema"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2.1 Página de Login"
+    },
+    {
+      "type": "paragraph",
+      "text": "Para acceder al sistema, ingrese a la URL proporcionada por su institución. Se mostrará la página de inicio de sesión donde deberá ingresar su correo electrónico y contraseña."
+    },
+    {
+      "type": "paragraph",
+      "text": "Pasos:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Ingrese su correo electrónico en el campo correspondiente",
+        "Ingrese su contraseña en el campo de contraseña",
+        "Haga clic en el botón 'Iniciar Sesión'",
+        "El sistema lo redirigirá a su panel según su rol"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2.2 Registro de Nuevo Usuario"
+    },
+    {
+      "type": "paragraph",
+      "text": "Si es la primera vez que accede al sistema, deberá registrarse haciendo clic en 'Regístrate aquí' en la página de login."
+    },
+    {
+      "type": "paragraph",
+      "text": "Datos requeridos:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Nombre completo",
+        "Número de documento (6-12 dígitos)",
+        "Tipo de rol: Aprendiz, Profesional o Coordinación",
+        "Correo electrónico",
+        "Contraseña (mínimo 6 caracteres)"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Nota: Los usuarios Profesionales y de Coordinación requieren aprobación del administrador antes de activar su cuenta.",
+      "italic": true
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "2.3 Recuperación de Contraseña"
+    },
+    {
+      "type": "paragraph",
+      "text": "Si olvidó su contraseña, haga clic en '¿Olvidaste tu contraseña?' en la página de login. Recibirá un correo electrónico con un enlace para restablecer su contraseña."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "3. Roles y Permisos"
+    },
+    {
+      "type": "paragraph",
+      "text": "El sistema cuenta con cuatro roles principales:"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Rol",
+        "Descripción",
+        "Funciones Principales"
+      ],
+      "rows": [
+        [
+          "APRENDIZ",
+          "Estudiante del SENA",
+          "Agendar citas, ver estado, cancelar citas"
+        ],
+        [
+          "PROFESIONAL",
+          "Profesional de salud",
+          "Atender citas, gestionar horarios, notas clínicas"
+        ],
+        [
+          "COORDINACION",
+          "Coordinador de dependencia",
+          "Ver métricas, exportar datos, supervisar"
+        ],
+        [
+          "SUPERADMIN",
+          "Administrador del sistema",
+          "Gestionar usuarios, roles, configuración"
+        ]
+      ]
+    },
+    {
+      "type": "spacer",
+      "height": 10
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "4. Panel del Aprendiz"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4.1 Vista General"
+    },
+    {
+      "type": "paragraph",
+      "text": "El panel del aprendiz muestra un resumen de todas sus citas con estadísticas por estado: pendientes, confirmadas, completadas y canceladas."
+    },
+    {
+      "type": "paragraph",
+      "text": "Características principales:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Filtros por estado de cita (Todas, Pendientes, Confirmadas, Completadas, Canceladas)",
+        "Botón flotante (FAB) para agendar nueva cita",
+        "Paginación para navegar entre citas",
+        "Botón de actualizar para refrescar datos"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4.2 Agendar Nueva Cita"
+    },
+    {
+      "type": "paragraph",
+      "text": "Para agendar una nueva cita:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Haga clic en el botón '+' (FAB) en la esquina inferior derecha",
+        "Seleccione la dependencia (Psicología, Enfermería, etc.)",
+        "Seleccione un profesional disponible",
+        "Elija fecha y hora disponible",
+        "Describa el motivo de la cita",
+        "Confirme la solicitud"
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Nota: Solo puede tener un máximo de 2 citas pendientes simultáneamente.",
+      "italic": true
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4.3 Cancelar Cita"
+    },
+    {
+      "type": "paragraph",
+      "text": "Para cancelar una cita pendiente, haga clic en el botón 'Cancelar' en la tarjeta de la cita. La acción es inmediata y no se puede deshacer."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "5. Panel del Profesional"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5.1 Agenda del Día"
+    },
+    {
+      "type": "paragraph",
+      "text": "La agenda del día muestra todas las citas programadas para la fecha seleccionada. El profesional puede:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Confirmar citas pendientes",
+        "Marcar citas como completadas",
+        "Registrar no asistencias",
+        "Agregar notas clínicas a las citas",
+        "Cambiar la fecha para ver otras agendas"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5.2 Gestión de Horarios"
+    },
+    {
+      "type": "paragraph",
+      "text": "En la pestaña 'Mis Horarios', el profesional puede configurar su disponibilidad semanal:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Agregar nuevos horarios por día de la semana",
+        "Definir hora de inicio y fin",
+        "Activar/desactivar horarios sin eliminarlos",
+        "Eliminar horarios que ya no apliquen"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5.3 Estadísticas Personales"
+    },
+    {
+      "type": "paragraph",
+      "text": "La pestaña 'Estadísticas' muestra métricas de desempeño del profesional:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Total de citas atendidas",
+        "Tasa de asistencia",
+        "Citas por dependencia",
+        "Tendencia mensual"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "5.4 Notas Clínicas"
+    },
+    {
+      "type": "paragraph",
+      "text": "Al completar una cita, el profesional puede registrar notas clínicas que incluyen:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Descripción de la atención",
+        "Observaciones adicionales",
+        "Recomendaciones para el aprendiz"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "6. Panel de Coordinación"
+    },
+    {
+      "type": "paragraph",
+      "text": "El panel de coordinación ofrece una vista general de métricas y KPIs relevantes para la gestión del bienestar."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6.1 KPIs Principales"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Total de citas en el periodo",
+        "Citas pendientes",
+        "Tasa de cumplimiento",
+        "Profesionales activos",
+        "No asistencias",
+        "Tiempo promedio de espera"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "6.2 Filtros y Exportación"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Filtros avanzados por rango de fechas",
+        "Exportación de datos a CSV",
+        "Botón de actualización de métricas"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "7. Panel de Administración"
+    },
+    {
+      "type": "paragraph",
+      "text": "El panel de administración está disponible exclusivamente para usuarios con rol SUPERADMIN."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7.1 Gestión de Usuarios"
+    },
+    {
+      "type": "paragraph",
+      "text": "Permite administrar todos los usuarios del sistema:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Ver lista completa de usuarios",
+        "Buscar usuarios por nombre o correo",
+        "Cambiar roles de usuarios",
+        "Activar/desactivar usuarios",
+        "Crear nuevos usuarios"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7.2 Gestión de Dependencias"
+    },
+    {
+      "type": "paragraph",
+      "text": "Administra las dependencias (áreas de bienestar) del sistema:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Crear nuevas dependencias",
+        "Editar nombre y color de dependencias",
+        "Eliminar dependencias"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7.3 Roles y Permisos"
+    },
+    {
+      "type": "paragraph",
+      "text": "Gestiona los roles del sistema y sus permisos asociados."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7.4 Registro de Auditoría"
+    },
+    {
+      "type": "paragraph",
+      "text": "Muestra un registro detallado de todas las acciones realizadas en el sistema:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Creación de usuarios",
+        "Agendamiento de citas",
+        "Cambios de estado",
+        "Configuración del sistema"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "7.5 Configuración del Sistema"
+    },
+    {
+      "type": "paragraph",
+      "text": "Permite configurar parámetros generales del sistema."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "8. Funcionalidades Generales"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8.1 Modo Oscuro"
+    },
+    {
+      "type": "paragraph",
+      "text": "El sistema ofrece un tema oscuro para mayor comodidad visual. Para activarlo:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Haga clic en el botón de tema (sol/luna) en la barra lateral",
+        "El cambio se aplica inmediatamente",
+        "La preferencia se guarda para futuras sesiones"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8.2 Paleta de Comandos"
+    },
+    {
+      "type": "paragraph",
+      "text": "Acceda rápidamente a cualquier funcionalidad:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Presione Ctrl+K (o Cmd+K en Mac)",
+        "Escriba lo que desea buscar",
+        "Seleccione la opción deseada",
+        "Presione Escape para cerrar"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8.3 Perfil de Usuario"
+    },
+    {
+      "type": "paragraph",
+      "text": "Para acceder a su perfil:"
+    },
+    {
+      "type": "list",
+      "items": [
+        "Haga clic en su nombre en la barra lateral",
+        "Se abrirá un panel con su información",
+        "Puede cerrar el panel con el botón X"
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "8.4 Responsive"
+    },
+    {
+      "type": "paragraph",
+      "text": "El sistema está optimizado para dispositivos móviles. La interfaz se adapta automáticamente al tamaño de la pantalla."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "9. Solución de Problemas"
+    },
+    {
+      "type": "table",
+      "headers": [
+        "Problema",
+        "Solución"
+      ],
+      "rows": [
+        [
+          "No puedo iniciar sesión",
+          "Verifique su correo y contraseña. Si olvidó su contraseña, use la opción de recuperación."
+        ],
+        [
+          "No veo la opción de agendar",
+          "Verifique que no tenga 2 citas pendientes. Solo se permiten 2 pendientes simultáneas."
+        ],
+        [
+          "Los datos no se actualizan",
+          "Haga clic en el botón 'Actualizar' o recargue la página."
+        ],
+        [
+          "No accedo a cierta página",
+          "Verifique que su rol tenga los permisos necesarios. Contacte al administrador si el problema persiste."
+        ],
+        [
+          "La página no se ve bien",
+          "Intente limpiar la caché del navegador o usar otro navegador."
+        ]
+      ]
+    },
+    {
+      "type": "spacer",
+      "height": 20
+    },
+    {
+      "type": "line"
+    },
+    {
+      "type": "paragraph",
+      "text": "Para soporte técnico, contacte al administrador del sistema.",
+      "italic": true
+    },
+    {
+      "type": "paragraph",
+      "text": "SENA Bienestar - Sistema de Gestión de Citas © 2026",
+      "italic": true
+    }
+  ]
+}
