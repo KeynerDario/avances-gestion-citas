@@ -159,6 +159,13 @@
   font-weight: 700;
 }
 
+.auth-logo-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(26, 92, 46, 0.3));
+}
+
 .auth-card h2 {
   font-size: 1.5rem;
   font-weight: 700;

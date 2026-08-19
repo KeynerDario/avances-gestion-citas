@@ -81,14 +81,28 @@
 .kpi-card {
   background: var(--sena-white);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 22px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
-  transition: box-shadow 200ms ease;
+  transition: all 250ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--kpi-color, var(--sena-green));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .kpi-card:hover {
   box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .kpi-header {
@@ -102,8 +116,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-md);
   flex-shrink: 0;
 }
@@ -124,7 +138,7 @@
 }
 
 .kpi-card .kpi-value {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   line-height: 1;
   margin-bottom: 8px;
@@ -173,7 +187,8 @@
   background: var(--sena-white);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  box-shadow: 0 1px 3px var(--shadow-sm);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 .chart-container h3 {
@@ -187,7 +202,8 @@
   background: var(--sena-white);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
-  box-shadow: 0 1px 3px var(--shadow-sm);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,12 +217,22 @@
   color: var(--border-color-strong);
 }
 
+.chart-placeholder p {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.chart-placeholder span {
+  font-size: 0.85rem;
+}
+
 /* Professional Table */
 .professionals-section {
   background: var(--sena-white);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  box-shadow: 0 1px 3px var(--shadow-sm);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 .professionals-section h3 {
@@ -216,6 +242,11 @@
   margin-bottom: var(--space-md);
 }
 
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+}
+
 .professional-table {
   width: 100%;
   border-collapse: collapse;
@@ -223,7 +254,7 @@
 
 .professional-table th,
 .professional-table td {
-  padding: var(--space-sm) var(--space-md);
+  padding: 12px var(--space-md);
   text-align: left;
   border-bottom: 1px solid var(--bg-hover);
 }
@@ -235,6 +266,10 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   background: var(--sena-gray);
+}
+
+.professional-table tbody tr {
+  transition: background-color 150ms ease;
 }
 
 .professional-table tbody tr:hover {

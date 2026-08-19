@@ -294,51 +294,75 @@
 
 /* --- Sidebar --- */
 [data-theme="dark"] .sidebar {
-  border-right-color: var(--border-color);
+  border-right-color: rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] .sidebar-brand {
-  border-bottom-color: var(--border-color);
+  border-bottom-color: rgba(255, 255, 255, 0.15);
 }
 
 [data-theme="dark"] .sidebar-link {
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 [data-theme="dark"] .sidebar-link:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
 }
 
 [data-theme="dark"] .sidebar-link.active {
-  background: rgba(46, 125, 66, 0.15);
-  color: var(--sena-green);
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
 [data-theme="dark"] .sidebar-user:hover {
-  background: var(--bg-hover);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 [data-theme="dark"] .sidebar-actions button {
-  color: var(--text-secondary);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 [data-theme="dark"] .sidebar-actions button:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+[data-theme="dark"] .sidebar-actions button.logout {
+  border-color: rgba(255, 150, 150, 0.3);
+  background: rgba(255, 100, 100, 0.15);
+  color: rgba(255, 200, 200, 1);
+}
+
+[data-theme="dark"] .sidebar-actions button.logout:hover {
+  background: rgba(255, 80, 80, 0.3);
+  border-color: rgba(255, 120, 120, 0.5);
+  color: #ffcccc;
 }
 
 [data-theme="dark"] .sidebar-search {
-  background: var(--bg-input);
-  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 [data-theme="dark"] .sidebar-search input {
-  color: var(--text-primary);
+  color: white;
 }
 
 [data-theme="dark"] .sidebar-footer {
-  border-top-color: var(--border-color);
+  border-top-color: rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="dark"] .sidebar-user-name {
+  color: white;
+}
+
+[data-theme="dark"] .sidebar-user-role {
+  color: rgba(255, 255, 255, 0.65);
 }
 
 /* --- Profile Panel --- */

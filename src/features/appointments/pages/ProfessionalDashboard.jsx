@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useAppointments } from "../hooks/useAppointments";
 import { useProfessional } from "../hooks/useProfessional";
 import { DayAgenda } from "../components/DayAgenda";
@@ -32,6 +33,7 @@ function getGreeting() {
 }
 
 export default function ProfessionalDashboard() {
+  const [searchParams] = useSearchParams();
   const { profile } = useAuth();
   const roleLabel = profile?.dependencies?.name || "Profesional";
   const {
@@ -53,7 +55,7 @@ export default function ProfessionalDashboard() {
     updateAppointmentStatus,
   } = useProfessional();
 
-  const [activeTab, setActiveTab] = useState("agenda");
+  const activeTab = searchParams.get("tab") || "agenda";
   const [noteModal, setNoteModal] = useState(null);
   const [selectedDate, setSelectedDate] = useState(() => {
     const now = new Date();
@@ -73,25 +75,24 @@ export default function ProfessionalDashboard() {
     refreshDayAgenda();
   }, [fetchSchedules, fetchStats, refreshDayAgenda]);
 
+  useEffect(() => {
+    if (activeTab === "agenda") {
+      refreshDayAgenda();
+    }
+    if (activeTab === "pending") {
+      fetchAppointments({ status: "pending" });
+    }
+    if (activeTab === "history") {
+      fetchAppointments({ status: "completed" });
+    }
+    if (activeTab === "stats") {
+      fetchStats();
+    }
+  }, [activeTab, refreshDayAgenda, fetchAppointments, fetchStats]);
+
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
     fetchDayAgenda(newDate);
-  };
-
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-    if (tab === "agenda") {
-      refreshDayAgenda();
-    }
-    if (tab === "pending") {
-      fetchAppointments({ status: "pending" });
-    }
-    if (tab === "history") {
-      fetchAppointments({ status: "completed" });
-    }
-    if (tab === "stats") {
-      fetchStats();
-    }
   };
 
   const handleConfirm = async (id) => {
@@ -116,14 +117,6 @@ export default function ProfessionalDashboard() {
       fetchStats();
     }
   };
-
-  const tabs = [
-    { id: "agenda", label: "Agenda del Día", icon: Calendar },
-    { id: "pending", label: "Pendientes", icon: Clock },
-    { id: "history", label: "Historial", icon: List },
-    { id: "stats", label: "Estadísticas", icon: BarChart3 },
-    { id: "schedule", label: "Mis Horarios", icon: Settings },
-  ];
 
   const greeting = useMemo(() => getGreeting(), []);
   const GreetingIcon = greeting.icon;
@@ -164,23 +157,6 @@ export default function ProfessionalDashboard() {
             </div>
           </div>
         )}
-
-        <nav className="prof-tabs" role="tablist" aria-label="Dashboard sections">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              role="tab"
-              id={`tab-${tab.id}`}
-              aria-selected={activeTab === tab.id}
-              aria-controls={`panel-${tab.id}`}
-              className={activeTab === tab.id ? "active" : ""}
-              onClick={() => handleTabChange(tab.id)}
-            >
-              <tab.icon size={16} />
-              <span>{tab.label}</span>
-            </button>
-          ))}
-        </nav>
 
         <main
           className="dashboard-content"

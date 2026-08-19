@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Shield, Check, Save, RotateCcw } from "lucide-react";
+import { Shield, Save, RotateCcw, CheckCircle2 } from "lucide-react";
 import { useAdmin } from "../hooks/useAdmin";
 import { supabase } from "../../../lib/supabase";
 import { toast } from "sonner";
@@ -27,14 +27,17 @@ const ALL_PERMISSIONS = [
   { key: "appointments:complete", label: "Completar citas", cat: "Citas" },
   { key: "appointments:cancel", label: "Cancelar citas", cat: "Citas" },
   { key: "appointments:no_show", label: "Marcar no asistió", cat: "Citas" },
+  { key: "appointments:reschedule", label: "Reprogramar citas", cat: "Citas" },
   { key: "users:view", label: "Ver usuarios", cat: "Usuarios" },
   { key: "users:create", label: "Crear usuarios", cat: "Usuarios" },
   { key: "users:edit_role", label: "Cambiar roles", cat: "Usuarios" },
   { key: "users:edit_dependency", label: "Cambiar dependencia", cat: "Usuarios" },
   { key: "users:toggle_status", label: "Activar/desactivar", cat: "Usuarios" },
+  { key: "users:export", label: "Exportar usuarios", cat: "Usuarios" },
   { key: "dashboard:view_stats", label: "Ver estadísticas", cat: "Dashboard" },
   { key: "dashboard:view_charts", label: "Ver gráficas", cat: "Dashboard" },
   { key: "dashboard:export_data", label: "Exportar datos", cat: "Dashboard" },
+  { key: "dashboard:view_kpis", label: "Ver KPIs", cat: "Dashboard" },
   { key: "schedule:view_own", label: "Ver horarios propios", cat: "Horarios" },
   { key: "schedule:manage_own", label: "Gestionar horarios propios", cat: "Horarios" },
   { key: "schedule:view_all", label: "Ver todos los horarios", cat: "Horarios" },
@@ -44,9 +47,15 @@ const ALL_PERMISSIONS = [
   { key: "clinical_notes:edit_own", label: "Editar notas propias", cat: "Notas Clínicas" },
   { key: "clinical_notes:delete_own", label: "Eliminar notas propias", cat: "Notas Clínicas" },
   { key: "clinical_notes:view_all", label: "Ver todas las notas", cat: "Notas Clínicas" },
+  { key: "reports:view", label: "Ver reportes", cat: "Reportes" },
+  { key: "reports:generate", label: "Generar reportes", cat: "Reportes" },
+  { key: "reports:export", label: "Exportar reportes", cat: "Reportes" },
+  { key: "dependencies:view", label: "Ver dependencias", cat: "Dependencias" },
+  { key: "dependencies:manage", label: "Gestionar dependencias", cat: "Dependencias" },
   { key: "config:view", label: "Ver configuración", cat: "Configuración" },
   { key: "config:edit", label: "Editar configuración", cat: "Configuración" },
   { key: "audit:view", label: "Ver logs de auditoría", cat: "Auditoría" },
+  { key: "audit:export", label: "Exportar auditoría", cat: "Auditoría" },
 ];
 
 const DEFAULT_PERMISSIONS = {
@@ -244,7 +253,7 @@ export function RolesPermissions() {
                               aria-pressed={enabled}
                               aria-label={`${enabled ? "Quitar" : "Dar"} permiso ${perm.label} a ${ROLE_LABELS[role.name]}`}
                             >
-                              {enabled && <Check size={12} strokeWidth={3} />}
+                              {enabled && <CheckCircle2 size={14} strokeWidth={2.5} />}
                             </button>
                           </td>
                         );

@@ -1,22 +1,23 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
-  Menu, X, ChevronLeft, ChevronRight, Command,
+  Menu, X, ChevronLeft, ChevronRight, ChevronDown, Command,
   Home, Calendar, CalendarDays, Users, UserCog, Building2, BarChart3, Settings,
   Sun, Moon, LogOut, Search, ChevronUp,
   User, Mail, Lock, Save, Bell, Palette, Info,
   BellRing, Type, PaintBucket, Eye, EyeOff,
-  Loader2, UserCircle,
+  Loader2, UserCircle, Clock, CheckCircle, XCircle, AlertCircle,
+  List, CalendarCheck, FileText, Shield,
 } from "lucide-react";
 import { useTheme } from "../../providers/useTheme";
 import { useAuth } from "../../providers/AuthContext";
 import { supabase } from "../../lib/supabase";
 import { toast } from "sonner";
 import { CommandPalette } from "./CommandPalette";
+import logoSena from "../../assets/logo-sena-verde.png";
 
 const ROLE_LABELS = { SUPERADMIN: "Super Admin", COORDINACION: "Coordinación", PROFESIONAL: "Profesional", APRENDIZ: "Aprendiz" };
-const ROLE_COLORS = { SUPERADMIN: "#f59e0b", COORDINACION: "#3b82f6", PROFESIONAL: "#8b5cf6", APRENDIZ: "#6b7280" };
-const NAV_ICONS = { Home, Calendar, CalendarDays, Users, UserCog, Building2, BarChart3, Settings };
+const NAV_ICONS = { Home, Calendar, CalendarDays, Users, UserCog, Building2, BarChart3, Settings, Clock, CheckCircle, XCircle, AlertCircle, List, CalendarCheck, FileText, Shield };
 const ACCENTS = [{ name: "SENA", value: "#1a5c2e" }, { name: "Azul", value: "#2563eb" }, { name: "Morado", value: "#7c3aed" }];
 
 export function DashboardLayout({ title, actions = [], children, userRole, loading = false, empty = false, fullHeight = false }) {
@@ -33,12 +34,32 @@ export function DashboardLayout({ title, actions = [], children, userRole, loadi
 
   const navItems = useMemo(() => [
     { label: "Inicio", icon: "Home", href: "/", roles: ["SUPERADMIN", "COORDINACION", "PROFESIONAL", "APRENDIZ"] },
-    { label: "Mis Citas", icon: "Calendar", href: "/dashboard", roles: ["APRENDIZ"] },
-    { label: "Mi Agenda", icon: "CalendarDays", href: "/professional", roles: ["PROFESIONAL"] },
-    { label: "Panel", icon: "BarChart3", href: "/coordination", roles: ["COORDINACION"] },
-    { label: "Admin", icon: "Settings", href: "/admin", roles: ["SUPERADMIN"] },
-    { label: "Usuarios", icon: "UserCog", href: "/admin", roles: ["SUPERADMIN"] },
-    { label: "Reportes", icon: "BarChart3", href: "/coordination", roles: ["COORDINACION", "SUPERADMIN"] },
+    { label: "Mis Citas", icon: "Calendar", href: "/dashboard", roles: ["APRENDIZ"], children: [
+      { label: "Todas", icon: "Calendar", href: "/dashboard?tab=all" },
+      { label: "Pendientes", icon: "Clock", href: "/dashboard?tab=pending" },
+      { label: "Confirmadas", icon: "CheckCircle", href: "/dashboard?tab=confirmed" },
+      { label: "Completadas", icon: "CheckCircle", href: "/dashboard?tab=completed" },
+      { label: "Canceladas", icon: "XCircle", href: "/dashboard?tab=cancelled" },
+    ]},
+    { label: "Mi Agenda", icon: "CalendarDays", href: "/professional", roles: ["PROFESIONAL"], children: [
+      { label: "Agenda del Día", icon: "Calendar", href: "/professional?tab=agenda" },
+      { label: "Pendientes", icon: "Clock", href: "/professional?tab=pending" },
+      { label: "Historial", icon: "List", href: "/professional?tab=history" },
+      { label: "Estadísticas", icon: "BarChart3", href: "/professional?tab=stats" },
+      { label: "Mis Horarios", icon: "Settings", href: "/professional?tab=schedule" },
+    ]},
+    { label: "Panel", icon: "BarChart3", href: "/coordination", roles: ["COORDINACION"], children: [
+      { label: "Estadísticas", icon: "BarChart3", href: "/coordination?tab=stats" },
+      { label: "Reportes", icon: "FileText", href: "/coordination?tab=reports" },
+      { label: "Profesionales", icon: "Users", href: "/coordination?tab=professionals" },
+    ]},
+    { label: "Admin", icon: "Settings", href: "/admin", roles: ["SUPERADMIN"], children: [
+      { label: "Usuarios", icon: "Users", href: "/admin?tab=users" },
+      { label: "Dependencias", icon: "Building2", href: "/admin?tab=deps" },
+      { label: "Roles y Permisos", icon: "Shield", href: "/admin?tab=roles" },
+      { label: "Auditoría", icon: "FileText", href: "/admin?tab=audit" },
+      { label: "Configuración", icon: "Settings", href: "/admin?tab=config" },
+    ]},
   ], []);
 
   const filteredNav = useMemo(() => {
@@ -78,7 +99,7 @@ export function DashboardLayout({ title, actions = [], children, userRole, loadi
         <div className="sidebar-inner">
           {/* Logo */}
           <div className="sidebar-brand">
-            <div className="sidebar-logo"><span>S</span></div>
+            <img src={logoSena} alt="SENA" className="sidebar-logo-img" />
             {!collapsed && <span className="sidebar-brand-text">SENA Bienestar</span>}
           </div>
 
@@ -90,7 +111,7 @@ export function DashboardLayout({ title, actions = [], children, userRole, loadi
                 <>
                   {/* Hero: avatar + info */}
                   <div className="sidebar-profile-hero">
-                    <div className="sidebar-profile-avatar" style={{ background: ROLE_COLORS[roleName] || "#6b7280" }}>{initial}</div>
+                    <div className="sidebar-profile-avatar">{initial}</div>
                     <div className="sidebar-profile-name">{profile?.full_name || "Usuario"}</div>
                     <div className="sidebar-profile-email">{user?.email}</div>
                     <div className="sidebar-profile-badges">
@@ -139,11 +160,28 @@ export function DashboardLayout({ title, actions = [], children, userRole, loadi
                 {filteredNav.map(item => {
                   const Icon = NAV_ICONS[item.icon];
                   const active = location.pathname === item.href || (item.href !== "/" && location.pathname.startsWith(item.href));
+                  const hasChildren = item.children && item.children.length > 0;
                   return (
-                    <Link key={item.label + item.href} to={item.href} className={`sidebar-link ${active ? "active" : ""}`} title={collapsed ? item.label : ""}>
-                      <span className="sidebar-link-icon">{Icon && <Icon size={18} />}</span>
-                      {!collapsed && <span className="sidebar-link-text">{item.label}</span>}
-                    </Link>
+                    <div key={item.label + item.href} className="sidebar-nav-group">
+                      <Link to={item.href} className={`sidebar-link ${active ? "active" : ""}`} title={collapsed ? item.label : ""} onClick={() => { if (isMobile) setMobileOpen(false); }}>
+                        <span className="sidebar-link-icon">{Icon && <Icon size={18} />}</span>
+                        {!collapsed && <span className="sidebar-link-text">{item.label}</span>}
+                      </Link>
+                      {hasChildren && !collapsed && (
+                        <div className="sidebar-sub-items">
+                          {item.children.map(child => {
+                            const ChildIcon = NAV_ICONS[child.icon];
+                            const childActive = location.search.includes(child.href.split("?")[1]);
+                            return (
+                              <Link key={child.label} to={child.href} className={`sidebar-sub-link ${childActive ? "active" : ""}`} onClick={() => { if (isMobile) setMobileOpen(false); }}>
+                                <span className="sidebar-sub-icon">{ChildIcon && <ChildIcon size={14} />}</span>
+                                <span className="sidebar-sub-text">{child.label}</span>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
                   );
                 })}
               </nav>
@@ -160,7 +198,7 @@ export function DashboardLayout({ title, actions = [], children, userRole, loadi
               {/* Footer: user button */}
               <div className="sidebar-footer">
                 <button className="sidebar-user" onClick={() => { setProfileOpen(true); setProfileView("main"); if (collapsed) setCollapsed(false); }}>
-                  <div className="sidebar-avatar" style={{ background: ROLE_COLORS[roleName] || "#6b7280" }}>{initial}</div>
+                  <div className="sidebar-avatar">{initial}</div>
                   {!collapsed && (
                     <div className="sidebar-user-info">
                       <span className="sidebar-user-name">{profile?.full_name || "Usuario"}</span>

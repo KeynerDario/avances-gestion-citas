@@ -123,7 +123,7 @@ export default function CoordinationDashboard() {
               <KPICard
                 title="Total Citas"
                 value={kpis?.total_appointments || 0}
-                color="#f59e0b"
+                color="#1a5c2e"
                 subtitle="En periodo seleccionado"
               />
               <KPICard
@@ -141,7 +141,7 @@ export default function CoordinationDashboard() {
               <KPICard
                 title="Profesionales Activos"
                 value={summary.totalProf}
-                color="#8b5cf6"
+                color="#3b82f6"
                 subtitle="En bienestar"
               />
               <KPICard

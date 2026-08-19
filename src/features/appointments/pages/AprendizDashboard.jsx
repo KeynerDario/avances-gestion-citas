@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useAppointments } from "../hooks/useAppointments";
 import { AppointmentForm } from "../components/AppointmentForm";
 import { AppointmentCard } from "../components/AppointmentCard";
 import { Plus, Calendar, XCircle, CheckCircle, Clock, AlertCircle } from "lucide-react";
 import { DashboardLayout } from "../../../shared/components/DashboardLayout";
 import { Modal } from "../../../shared/components/Modal";
-import { useTabKeyboardNav } from "../../../shared/utils/useTabKeyboardNav";
 
 const STATUS_TABS = [
   { id: "all", label: "Todas", icon: Calendar },
@@ -17,13 +17,15 @@ const STATUS_TABS = [
 ];
 
 export default function AprendizDashboard() {
+  const [searchParams] = useSearchParams();
   const { appointments, fetchAppointments, cancelAppointment, isLoading } =
     useAppointments();
   const [showForm, setShowForm] = useState(false);
   const [showCelebration, setShowCelebration] = useState(false);
-  const [activeTab, setActiveTab] = useState("all");
   const [page, setPage] = useState(1);
   const PAGE_SIZE = 10;
+
+  const activeTab = searchParams.get("tab") || "all";
 
   useEffect(() => {
     fetchAppointments();
@@ -40,11 +42,6 @@ export default function AprendizDashboard() {
     page * PAGE_SIZE,
   );
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-    setPage(1);
-  };
-
   const counts = {
     pending: appointments.filter((a) => a.status === "pending").length,
     confirmed: appointments.filter((a) => a.status === "confirmed").length,
@@ -54,8 +51,6 @@ export default function AprendizDashboard() {
   };
 
   const canCreate = counts.pending < 2;
-  const tabIds = STATUS_TABS.map((t) => t.id);
-  const handleTabKeyDown = useTabKeyboardNav(tabIds, activeTab, handleTabChange);
 
   const dashboardActions = [
     {
@@ -159,33 +154,6 @@ export default function AprendizDashboard() {
         />
       </Modal>
 
-      <nav className="filter-tabs" role="tablist" onKeyDown={handleTabKeyDown}>
-        {STATUS_TABS.map((tab) => {
-          const Icon = tab.icon;
-          const count = counts[tab.id] || 0;
-          return (
-            <button
-              key={tab.id}
-              role="tab"
-              id={`tab-${tab.id}`}
-              tabIndex={activeTab === tab.id ? 0 : -1}
-              aria-selected={activeTab === tab.id}
-              aria-controls={`panel-${tab.id}`}
-              className={`tab-btn ${activeTab === tab.id ? "active" : ""}`}
-              onClick={() => handleTabChange(tab.id)}
-            >
-              <Icon size={15} />
-              {tab.label}
-              {count > 0 && (
-                <span className={`tab-badge ${tab.id === "pending" ? "" : tab.id === "confirmed" ? "blue" : "gray"}`}>
-                  {count}
-                </span>
-              )}
-            </button>
-          );
-        })}
-      </nav>
-
       <section
         className="appointments-list"
         role="tabpanel"
@@ -257,12 +225,13 @@ export default function AprendizDashboard() {
         )}
       </section>
 
-      {activeTab === "all" && canCreate && (
+      {activeTab === "all" && (
         <button
-          onClick={() => setShowForm(true)}
-          className="fab-btn"
-          title="Nueva cita"
+          onClick={() => canCreate ? setShowForm(true) : null}
+          className={`fab-btn ${!canCreate ? "fab-disabled" : ""}`}
+          title={canCreate ? "Nueva cita" : "Tienes 2 citas pendientes"}
           aria-label="Nueva cita"
+          disabled={!canCreate}
         >
           <Plus size={24} />
         </button>

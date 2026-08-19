@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../../providers/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { Mail, Lock, LogIn, Loader2, Eye, EyeOff, ClipboardList, Stethoscope, BarChart3, ArrowRight, Shield, Check } from "lucide-react";
+import logoSena from "../../../assets/logo-sena-verde.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -64,7 +65,7 @@ export default function Login() {
       <div className="auth-right">
         <div className="auth-card">
           <div className="auth-logo">
-            <div className="logo-icon">S</div>
+            <img src={logoSena} alt="Logo SENA" className="auth-logo-img" />
           </div>
 
           <h2>Bienvenido de vuelta</h2>

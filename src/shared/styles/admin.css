@@ -1545,36 +1545,7 @@
   text-align: center;
 }
 
-.perm-matrix-check {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  border: 1.5px solid #d1d5db;
-  background: #fff;
-  color: transparent;
-  cursor: pointer;
-  transition: all 0.15s;
-  padding: 0;
-}
-
-.perm-matrix-check:hover {
-  border-color: #9ca3af;
-  background: #f3f4f6;
-}
-
-.perm-matrix-check.active {
-  border-color: #10b981;
-  background: #10b981;
-  color: #fff;
-}
-
-.perm-matrix-check.active:hover {
-  background: #059669;
-  border-color: #059669;
-}
+/* Enhanced check button styles moved to end of file */
 
 .perm-matrix-footer-row {
   background: #f9fafb;
@@ -1640,6 +1611,97 @@
 .perm-matrix-btn.save:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* ============================================ */
+/* PERMISSION MATRIX - ENHANCED SUMMARY COLUMN  */
+/* ============================================ */
+.perm-matrix-th-summary {
+  text-align: center;
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 100px;
+}
+
+.perm-matrix-td-summary {
+  vertical-align: middle;
+  border-left: 2px solid var(--border-color);
+}
+
+.perm-summary-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 8px;
+}
+
+.perm-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.perm-summary-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.perm-summary-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.perm-summary-text {
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  min-width: 28px;
+  text-align: right;
+}
+
+/* Enhanced check button with animation */
+.perm-matrix-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 2px solid #d1d5db;
+  background: #fff;
+  color: transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 0;
+}
+
+.perm-matrix-check:hover {
+  border-color: #9ca3af;
+  background: #f3f4f6;
+  transform: scale(1.1);
+}
+
+.perm-matrix-check.active {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  animation: checkPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.perm-matrix-check.active:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  border-color: #059669;
+  transform: scale(1.1);
+}
+
+@keyframes checkPop {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 /* ============================================ */

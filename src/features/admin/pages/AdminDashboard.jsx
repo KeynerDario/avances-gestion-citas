@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import { UserManagement } from "../components/UserManagement";
 import { AuditLogViewer } from "../components/AuditLogViewer";
 import { SystemConfig } from "../components/SystemConfig";
@@ -9,16 +10,9 @@ import { useAdmin } from "../hooks/useAdmin";
 import { useAuth } from "../../../providers/AuthContext";
 import { DashboardLayout } from "../../../shared/components/DashboardLayout";
 
-const TABS = [
-  { id: "users", label: "Usuarios", icon: Users },
-  { id: "deps", label: "Dependencias", icon: Building2 },
-  { id: "roles", label: "Roles y Permisos", icon: Shield },
-  { id: "audit", label: "Auditoría", icon: Activity },
-  { id: "config", label: "Configuración", icon: Settings },
-];
-
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState("users");
+  const [searchParams] = useSearchParams();
+  const activeTab = searchParams.get("tab") || "users";
   const { fetchUserCounts, error, clearError } = useAdmin();
   const { profile } = useAuth();
   const userRole = profile?.roles?.name || "SUPERADMIN";
@@ -110,26 +104,6 @@ export default function AdminDashboard() {
             ))}
           </div>
         </div>
-
-        <nav className="admin-tabs" role="tablist">
-          {TABS.map((tab) => {
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                role="tab"
-                id={`tab-${tab.id}`}
-                aria-selected={activeTab === tab.id}
-                aria-controls={`panel-${tab.id}`}
-                className={`tab-btn ${activeTab === tab.id ? "active" : ""}`}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                <Icon size={18} />
-                {tab.label}
-              </button>
-            );
-          })}
-        </nav>
 
         <main
           className="admin-content"
